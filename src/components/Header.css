@@ -4,8 +4,9 @@
   align-items: center;
 }
 
-.button .MuiIconButton-root {
-  padding: 100px;
+.button .MuiSvgIcon-root {
+  width: 200px;
+  height: 200px;
   background-color: white !important;
   box-shadow: 0px 10px 53px 0px rgba(0, 0, 0, 0.3) !important;
 }

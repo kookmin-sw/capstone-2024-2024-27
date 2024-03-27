@@ -13,7 +13,7 @@ function Header() {
         <PersonIcon />
       </IconButton>
       <h1>Header</h1>
-      <IconButton className="button">
+      <IconButton className="button" width={200}>
         <ForumIcon />
       </IconButton>
       {/* {backButton ? (
