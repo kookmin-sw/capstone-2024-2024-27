@@ -9,11 +9,11 @@ import { Link, useHistory } from "react-router-dom";
 function Header() {
   return (
     <div className="header">
-      <IconButton style={{ color: "white" }}>
+      <IconButton className="button">
         <PersonIcon />
       </IconButton>
       <h1>Header</h1>
-      <IconButton style={{ color: "white" }}>
+      <IconButton className="button">
         <ForumIcon />
       </IconButton>
       {/* {backButton ? (

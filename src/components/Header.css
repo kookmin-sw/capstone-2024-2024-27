@@ -1,10 +1,16 @@
 .header {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 }
 
-.header__icon {
-  padding: 20px;
-  color: white;
+.button .MuiIconButton-root {
+  padding: 100px;
+  background-color: white !important;
+  box-shadow: 0px 10px 53px 0px rgba(0, 0, 0, 0.3) !important;
+}
+
+.swipeButtons .MuiIconButton-root {
+  background-color: white;
+  box-shadow: 0px 10px 53px 0px rgba(0, 0, 0, 0.3) !important;
 }
