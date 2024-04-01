@@ -42,6 +42,7 @@
 .profile__section {
   margin: 20px;
   margin-top: 60px;
+  padding: 0px;
 }
 
 .profile__textarea {
