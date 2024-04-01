@@ -4,6 +4,7 @@ import PersonIcon from "@material-ui/icons/Person";
 import IconButton from "@material-ui/core/IconButton";
 import ForumIcon from "@material-ui/icons/Forum";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import NotificationsNoneOutlinedIcon from "@material-ui/icons/NotificationsNoneOutlined";
 import { Link, useHistory } from "react-router-dom";
 
 function Header() {
@@ -12,9 +13,9 @@ function Header() {
       <IconButton className="button">
         <PersonIcon />
       </IconButton>
-      <h1>Header</h1>
-      <IconButton className="button" width={200}>
-        <ForumIcon />
+      <h1 className="header__text">Header</h1>
+      <IconButton className="button">
+        {<NotificationsNoneOutlinedIcon />}
       </IconButton>
       {/* {backButton ? (
         <IconButton
