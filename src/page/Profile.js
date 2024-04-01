@@ -10,11 +10,12 @@ function Profile() {
       try {
         const response = await axios.get("https://api.github.com/user", {
           headers: {
-            Authorization: `Bearer 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`,
+            Authorization: `Bearer ${process.env.REACT_APP_GITHUB_ACCESS_TOKEN}`,
           },
         });
         setUser(response.data);
       } catch (error) {
+        console.log("current token", process.env.REACT_APP_GITHUB_ACCESS_TOKEN);
         console.error("Error fetching user data:", error);
       }
     };
@@ -22,9 +23,9 @@ function Profile() {
     fetchUser();
   }, []);
 
-  // if (!user) {
-  //   return <div>Loading...</div>;
-  // }
+  if (!user) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="profile">

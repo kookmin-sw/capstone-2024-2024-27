@@ -10,7 +10,9 @@
       "args": ["--extensionDevelopmentPath=${workspaceRoot}"],
       "stopOnEntry": false,
       "sourceMaps": true,
-      "outDir": "${workspaceRoot}/ext-src"
+      "outDir": "${workspaceRoot}/ext-src",
+      "runtimeArgs": ["--auto-ssl-client-auth"],
+      "userDataDir": "${workspaceRoot}/data"
     }
   ]
 }
