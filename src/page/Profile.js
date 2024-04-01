@@ -1,10 +1,59 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Profile.css";
+import axios from "axios";
 
 function Profile() {
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await axios.get("https://api.github.com/user", {
+          headers: {
+            Authorization: `Bearer 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`,
+          },
+        });
+        setUser(response.data);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUser();
+  }, []);
+
+  // if (!user) {
+  //   return <div>Loading...</div>;
+  // }
+
   return (
     <div className="profile">
-      <h1>Profile</h1>
+      <div className="profile__header">
+        <img
+          className="profile__avatar"
+          src={user.avatar_url}
+          alt="User Avatar"
+        />
+        <div className="profile__user-info">
+          <span className="profile__label">Username: </span>
+          {user.name}
+          <div className="profile__link">
+            <span className="profile__label">Github Link: </span>{" "}
+            <a href={user.html_url} target="_blank" rel="noopener noreferrer">
+              {user.html_url}
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div className="profile__section">
+        <h3>Projects you want to do</h3>
+        <textarea className="profile__textarea" readOnly />
+        <h3>People you like</h3>
+        <textarea className="profile__textarea" readOnly />
+        <h3>People who like you</h3>
+        <textarea className="profile__textarea" readOnly />
+      </div>
     </div>
   );
 }

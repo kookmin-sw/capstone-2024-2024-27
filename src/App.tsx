@@ -8,6 +8,7 @@ import Header from "./components/Header";
 interface AppState {
   currentPage: "home" | "profile";
 }
+
 class App extends React.Component<{}, AppState> {
   constructor(props: {}) {
     super(props);
@@ -15,7 +16,6 @@ class App extends React.Component<{}, AppState> {
       currentPage: "home",
     };
   }
-
   handleProfileClick = () => {
     this.setState({
       currentPage: "profile",

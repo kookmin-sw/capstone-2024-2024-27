@@ -18,7 +18,7 @@ function Header({ currentPage, onProfileClick, onHomeClick }) {
       </IconButton>
       <h1 className="header__text">Header</h1>
       <IconButton className="button">
-        {<NotificationsNoneOutlinedIcon />}
+        {/* {<NotificationsNoneOutlinedIcon />} */}
       </IconButton>
     </div>
   );
