@@ -1,7 +1,7 @@
 ## 팀페이지 주소
 
 2024년 27조 
-- https://github.com/kookmin-sw/capstone-2024-27
+https://github.com/kookmin-sw/capstone-2024-27
 
 ### 1. 프로젝트 소개
 VSCode Extension을 통하여 Side Project를 함께 진행할 사람을 간편하게 찾을 수 있는 서비스입니다.
