@@ -1,34 +1,37 @@
-# VSCode Webview React
+## 팀페이지 주소
+
+2024년 27조 
+- https://github.com/kookmin-sw/capstone-2024-27
+
+### 1. 프로젝트 소개
+VSCode Extension을 통하여 Side Project를 함께 진행할 사람을 간편하게 찾을 수 있는 서비스입니다.
+
+### 2. 소개 영상
+
+프로젝트 소개하는 영상을 추가하세요
+
+### 3. 팀 소개
+
+|이름|학번|포지션|프로필 사진|깃허브|
+|-----------------------------------| - | - | - | - |
+| **이승원**                           | 20181662 | <center>백엔드</center> | <img src="https://github.com/kookmin-sw/capstone-2024-27/assets/89867182/5567f75a-4c3c-47b8-8fef-952a812737c4" width="100" height=auto/> | [https://github.com/KMUlee](https://github.com/KMUlee) |
+| **손동석**                           | 20182085 | <center>프론트엔드</center> | <img src="https://github.com/kookmin-sw/capstone-2024-27/assets/89867182/703dfcb4-516e-4ef6-ac8c-60c888e5bd79" width="100" height=auto/> | [https://github.com/belyllium](https://github.com/belyllium)| 
+
+
+
+### 4. 사용법
+
+```Test based on macOS.
+ git clone https://github.com/kookmin-sw/capstone-2024-27
+ npm install
+ npm run build
+ F5 to run Debug Mode
+ Command + P 이후 > React: Start React Webview
+```
+
+### 5. 기타
 
 This project was bootstrapped with 
 * [Create React App](https://github.com/facebookincubator/create-react-app)
 * [Create React App TypeScript](https://github.com/wmonk/create-react-app-typescript)
 * [VSCode Extension Webview Sample](https://github.com/Microsoft/vscode-extension-samples/tree/master/webview-sample)
-
-[The webview API](https://code.visualstudio.com/docs/extensions/webview) allows extensions to create customizable views within VSCode. Single Page Application frameworks are perfect fit for this use case. However, to make modern JavaScript frameworks/toolchains appeal to VSCode webview API's [security best practices](https://code.visualstudio.com/docs/extensions/webview#_security) requires some knowledge of both the bundling framework you are using and how VSCode secures webview. This project aims to provide an out-of-box starter kit for Create React App and TypeScript in VSCode's webview.
-
-## Development
-
-Run following commands in the terminal
-
-```shell
-yarn install --ignore-engines
-yarn run build
-```
-And then press F5, in Extension Development Host session, run `Start React Webview` command from command palette.
-
-## Under the hood
-
-Things we did on top of Create React App TypeScript template
-
-* We inline `index.html` content in `ext-src/extension.ts` when creating the webview
-* We set strict security policy for accessing resources in the webview.
-  * Only resources in `/build` can be accessed
-  * Onlu resources whose scheme is `vscode-resource` can be accessed.
-* For all resources we are going to use in the webview, we change their schemes to `vscode-resource`
-* Since we only allow local resources, absolute path for styles/images (e.g., `/static/media/logo.svg`) will not work. We add a `.env` file which sets `PUBLIC_URL` to `./` and after bundling, resource urls will be relative.
-* We add baseUrl `<base href="${vscode.Uri.file(path.join(this._extensionPath, 'build')).with({ scheme: 'vscode-resource' })}/">` and then all relative paths work.
-
-## Limitations
-
-Right now you can only run production bits (`yarn run build`) in the webview, how to make dev bits work (webpack dev server) is still unknown yet. Suggestions and PRs welcome !
