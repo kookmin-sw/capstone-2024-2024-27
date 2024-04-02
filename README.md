@@ -1,3 +1,7 @@
+# Codate
+Find your teammates with **Codate** for Toy Projects. You can find team members on VSCode Extension.
+
+
 ## 팀페이지 주소
 
 2024년 27조 
