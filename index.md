@@ -53,3 +53,7 @@ This project was bootstrapped with
 - [Create React App](https://github.com/facebookincubator/create-react-app)
 - [Create React App TypeScript](https://github.com/wmonk/create-react-app-typescript)
 - [VSCode Extension Webview Sample](https://github.com/Microsoft/vscode-extension-samples/tree/master/webview-sample)
+
+## 7. 중간 발표 자료
+
+- https://drive.google.com/file/d/1867KPy9Gw08wlo1PPlqnzEHTB3QlHWIe/view?usp=sharing
