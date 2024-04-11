@@ -56,4 +56,4 @@ This project was bootstrapped with
 
 ## 7. 중간 발표 자료
 
-- https://drive.google.com/file/d/1867KPy9Gw08wlo1PPlqnzEHTB3QlHWIe/view?usp=sharing
+- [PPT 링크](https://drive.google.com/file/d/1867KPy9Gw08wlo1PPlqnzEHTB3QlHWIe/view?usp=sharing)
