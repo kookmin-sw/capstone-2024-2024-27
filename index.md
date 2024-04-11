@@ -8,7 +8,7 @@ VSCode Extension을 통하여 Side Project를 함께 진행할 사람을 간편�
 
 ## 2. 소개 영상
 
-프로젝트 소개하는 영상을 추가하세요
+<img src="https://github.com/kookmin-sw/capstone-2024-27/assets/89867182/f01242be-7c26-455f-8802-47d5ffde1d65" width="300">
 
 ## 3. 팀 소개
 
