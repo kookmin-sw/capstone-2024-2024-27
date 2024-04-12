@@ -6,8 +6,8 @@ export const getTypeOrmConfig = (
   configService: ConfigService,
 ): TypeOrmModuleOptions => ({
   type: 'postgres',
-  host: 'localhost',
-  port: 8888,
+  host: 'capstone-db',
+  port: 5432,
   username: 'postgres',
   password: '1234',
   database: 'capstone',
