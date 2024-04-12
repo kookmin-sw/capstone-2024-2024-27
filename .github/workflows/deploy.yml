@@ -1,7 +1,7 @@
 name: Docker
 on:
   push:
-    branches: [main, develop]
+    branches: [backend]
 
 jobs:
   deploy-main:
