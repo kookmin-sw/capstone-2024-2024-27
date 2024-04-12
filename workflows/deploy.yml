@@ -1,0 +1,96 @@
+name: Docker
+on:
+  push:
+    branches: [main, develop]
+
+jobs:
+  deploy-main:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # 도커 이미지에 env 파일 포함
+      # - name: Create .env file
+      #   run: |
+      #     echo "POSTGRES_HOST=${{ secrets.POSTGRES_HOST}}" >> ./.env
+      #     echo "POSTGRES_PORT=${{ secrets.POSTGRES_PORT}}" >> ./.env
+      #     echo "POSTGRES_USER=${{ secrets.POSTGRES_USER}}" >> ./.env
+      #     echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD}}" >> ./.env
+      #     echo "POSTGRES_DB=${{ secrets.POSTGRES_DB}}" >> ./.env
+      #     echo "TYPEORM_SYNCHRONIZE=${{ secrets.TYPEORM_SYNCHRONIZE}}" >> ./.env
+      #     echo "JWT_SECRET_KEY=${{ secrets.JWT_SECRET_KEY}}" >> ./.env
+      #     echo "FRONT_LOGIN_URL=${{ secrets.FRONT_LOGIN_URL}}" >> ./.env
+
+      # 도커 메타
+      - name: Docker meta
+        id: docker_meta
+        uses: crazy-max/ghaction-docker-meta@v1
+        with:
+          images: nowgnues/capstone-back
+          tag-semver: |
+            {{version}}
+            {{major}}.{{minor}}
+          tag-custom: main
+
+      # 도커 빌드 관련 셋업
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      # 내 도커허브 로그인
+      - name: Login to DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      # 도커이미지 빌드하고 허브로 푸쉬
+      - name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: ./Dockerfile
+          platforms: |
+            linux/amd64
+          push: true
+          tags: ${{ steps.docker_meta.outputs.tags }}
+          labels: ${{ steps.docker_meta.outputs.labels }}
+
+      # Github Action 의 IP 불러옴
+      - name: Get Github Actions IP
+        id: ip
+        uses: haythem/public-ip@v1.2
+
+      # AWS 접근 인증
+      #- name: Configure AWS Credentials
+      #  uses: aws-actions/configure-aws-credentials@v1
+      #  with:
+      #    aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      #    aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      #    aws-region: ap-northeast-2
+
+      # AWS CLI로 EC2의 보안 그룹에 현재 Github Actions의 IP를 등록하여 SSH 접근이 가능하도록 해줍니다.
+      #- name: Add Github Actions IP to Security group
+      #  run: |
+      #    aws ec2 authorize-security-group-ingress --group-id ${{ secrets.AWS_SG_ID }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32
+
+      # EC2에 Docker 이미지 배포
+      - name: Deploy to EC2
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST }} # EC2 인스턴스의 호스트 주소
+          username: ${{ secrets.EC2_USERNAME }} # EC2 인스턴스의 사용자 이름
+          key: ${{ secrets.EC2_SSH_KEY }} # EC2 인스턴스에 접속하기 위한 SSH 키
+          script: |
+            # Docker 이미지 가져오기
+            sudo docker-compose -f /home/docker-compose/docker-compose/capstone/docker-compose.yml down --rmi all || true
+            sudo docker pull nowgnues/capstone-back:main
+            sudo docker-compose -f /home/docker-compose/docker-compose/capstone/docker-compose.yml up -d
+
+      # 인바운드 규칙 삭제
+      #- name: Remove Github Actions IP From Security Group
+      #  run: |
+      #    aws ec2 revoke-security-group-ingress --group-id ${{ secrets.AWS_SG_ID }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32
