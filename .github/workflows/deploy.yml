@@ -86,9 +86,9 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }} # EC2 인스턴스에 접속하기 위한 SSH 키
           script: |
             # Docker 이미지 가져오기
-            sudo docker-compose -f /home/docker-compose/docker-compose/capstone/docker-compose.yml down --rmi all || true
+            sudo docker-compose -f /home/docker-compose/capstone/docker-compose.yml down --rmi all || true
             sudo docker pull nowgnues/capstone-back:main
-            sudo docker-compose -f /home/docker-compose/docker-compose/capstone/docker-compose.yml up -d
+            sudo docker-compose -f /home/docker-compose/capstone/docker-compose.yml up -d
 
       # 인바운드 규칙 삭제
       #- name: Remove Github Actions IP From Security Group
