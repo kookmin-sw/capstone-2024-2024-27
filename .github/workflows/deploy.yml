@@ -14,7 +14,7 @@ jobs:
       # 도커 이미지에 env 파일 포함
       - name: Create .env file
         run: |
-          echo "DB_HOST=${{ secrets.DB_HOST}}" >> .env
+          echo "DB_HOST=${{ secrets.DB_HOST }}" >> ./.env
 
       # 도커 메타
       - name: Docker meta
