@@ -1,6 +1,6 @@
-import { Project } from 'src/project/entities/project.entity';
 import { User } from 'src/user/entities/user.entity';
 import {
+  Column,
   CreateDateColumn,
   Entity,
   ManyToOne,
@@ -13,10 +13,10 @@ export class Likes {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => User, (user) => user.likes)
-  userId: number;
+  @ManyToOne(() => User, (user) => user.likesList)
+  user: User;
 
-  @ManyToOne(() => Project, (project) => project.likes)
+  @Column()
   projectId: number;
 
   @CreateDateColumn({ type: 'timestamptz' })

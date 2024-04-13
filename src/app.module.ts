@@ -1,7 +1,5 @@
 import { Module } from '@nestjs/common';
 import { UserModule } from './user/user.module';
-import { ProjectController } from './project/project.controller';
-import { ProjectModule } from './project/project.module';
 import { LikesModule } from './likes/likes.module';
 import { AuthService } from './auth/auth.service';
 import { AuthController } from './auth/auth.controller';
@@ -9,6 +7,8 @@ import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { getTypeOrmConfig } from './configs/typeorm.config';
+import { ProfileModule } from './profile/profile.module';
+import { ProfileController } from './profile/profile.controller';
 
 @Module({
   imports: [
@@ -23,11 +23,11 @@ import { getTypeOrmConfig } from './configs/typeorm.config';
       envFilePath: '.env',
     }),
     UserModule,
-    ProjectModule,
     LikesModule,
     AuthModule,
+    ProfileModule,
   ],
-  controllers: [ProjectController, AuthController],
+  controllers: [AuthController, ProfileController],
   providers: [AuthService],
 })
 export class AppModule {}

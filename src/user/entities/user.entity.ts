@@ -1,6 +1,5 @@
 import { Exclude } from 'class-transformer';
 import { Likes } from 'src/likes/entities/likes.entity';
-import { Project } from 'src/project/entities/project.entity';
 import {
   Column,
   CreateDateColumn,
@@ -21,11 +20,8 @@ export class User {
   @Column()
   password: string;
 
-  @OneToMany(() => Project, (project) => project.userId)
-  projects: Project[];
-
-  @OneToMany(() => Likes, (likes) => likes.userId)
-  likes: Likes[];
+  @OneToMany(() => Likes, (likes) => likes.user)
+  likesList: Likes[];
 
   @CreateDateColumn({ type: 'timestamptz' })
   @Exclude()
