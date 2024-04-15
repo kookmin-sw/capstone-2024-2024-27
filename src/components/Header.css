@@ -27,6 +27,28 @@
   box-shadow: 0px 10px 53px 0px rgba(0, 0, 0, 0.3);
 }
 
+.edit__button .MuiIconButton-label {
+  /* Edit Button */
+  width: 60px;
+  height: 60px;
+  color: white;
+  border-radius: 80%;
+  background-color: rgba(128, 128, 128, 0.574);
+  box-shadow: 0px 10px 53px 0px rgba(0, 0, 0, 0.3);
+}
+
+.edit__button .MuiSvgIcon-root {
+  /* Edit Button */
+  width: 40px;
+  height: 40px;
+}
+
+.edit__button .doneIcon {
+  /* Edit Button */
+  width: 56px;
+  height: 56px;
+}
+
 .swipeButtons .MuiIconButton-root {
   background-color: gray;
   box-shadow: 0px 10px 53px 0px rgba(0, 0, 0, 0.3);
