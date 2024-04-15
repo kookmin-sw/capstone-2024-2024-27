@@ -2,12 +2,20 @@ import React from "react";
 import "./Header.css";
 import PersonIcon from "@material-ui/icons/Person";
 import IconButton from "@material-ui/core/IconButton";
-import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
-import NotificationsNoneOutlinedIcon from "@material-ui/icons/NotificationsNoneOutlined";
+import EditIcon from "@material-ui/icons/Edit";
 import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
-import { Link, useHistory } from "react-router-dom";
+import DoneIcon from "@material-ui/icons/Done";
+// import { Link, useHistory } from "react-router-dom";
+// import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+// import NotificationsNoneOutlinedIcon from "@material-ui/icons/NotificationsNoneOutlined";
 
-function Header({ currentPage, onProfileClick, onHomeClick }) {
+function Header({
+  currentPage,
+  onProfileClick,
+  onHomeClick,
+  onEditClick,
+  isReadOnly,
+}) {
   return (
     <div className="header">
       <IconButton
@@ -17,9 +25,11 @@ function Header({ currentPage, onProfileClick, onHomeClick }) {
         {currentPage === "home" ? <PersonIcon /> : <HomeOutlinedIcon />}
       </IconButton>
       <h1 className="header__text">Header</h1>
-      <IconButton className="button">
-        {/* {<NotificationsNoneOutlinedIcon />} */}
-      </IconButton>
+      {currentPage === "profile" && (
+        <IconButton className="edit__button" onClick={onEditClick}>
+          {isReadOnly ? <EditIcon /> : <DoneIcon className="doneIcon" />}
+        </IconButton>
+      )}
     </div>
   );
 }

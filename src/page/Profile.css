@@ -51,7 +51,7 @@
   padding: 0px;
 }
 
-.profile__textarea {
+/* .profile__textarea {
   width: 100%;
   height: 100px;
   resize: none;
@@ -61,12 +61,13 @@
   line-height: 1.5;
   border-radius: 20px;
   box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+} */
+
+.profile__textarea-readonly {
+  background-color: #f0f0f0 !important;
 }
-.profile__textarea[readonly] {
-  background-color: #f0f0f0;
-}
-.profile__textarea:not([readonly]) {
-  background-color: #fff;
+.profile__textarea-editable {
+  background-color: #fff !important;
 }
 
 .profile__label {

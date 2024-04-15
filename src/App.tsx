@@ -7,6 +7,7 @@ import Header from "./components/Header";
 
 interface AppState {
   currentPage: "home" | "profile";
+  isReadOnly?: boolean;
 }
 
 class App extends React.Component<{}, AppState> {
@@ -14,8 +15,10 @@ class App extends React.Component<{}, AppState> {
     super(props);
     this.state = {
       currentPage: "home",
+      isReadOnly: true,
     };
   }
+
   handleProfileClick = () => {
     this.setState({
       currentPage: "profile",
@@ -28,8 +31,15 @@ class App extends React.Component<{}, AppState> {
     });
   };
 
+  handleEditClick = () => {
+    this.setState((prevState) => ({
+      isReadOnly: !prevState.isReadOnly,
+      //setReadOnly: true,
+    }));
+  };
+
   render() {
-    const { currentPage } = this.state;
+    const { currentPage, isReadOnly } = this.state;
 
     return (
       <div className="App">
@@ -37,8 +47,14 @@ class App extends React.Component<{}, AppState> {
           currentPage={currentPage}
           onProfileClick={this.handleProfileClick}
           onHomeClick={this.handleHomeClick}
+          onEditClick={this.handleEditClick}
+          isReadOnly={isReadOnly}
         />
-        {currentPage === "home" ? <Home /> : <Profile />}
+        {currentPage === "home" ? (
+          <Home />
+        ) : (
+          <Profile onEditClick={this.handleEditClick} isReadOnly={isReadOnly} />
+        )}
       </div>
     );
   }

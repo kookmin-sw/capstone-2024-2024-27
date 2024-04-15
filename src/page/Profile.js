@@ -3,11 +3,13 @@ import "./Profile.css";
 import axios from "axios";
 import TextField from "@material-ui/core/TextField";
 
-function Profile() {
+function Profile({ onEditClick, isReadOnly }) {
   const [user, setUser] = useState(null);
-  const [isReadOnly, setIsReadOnly] = useState(true);
+  //const [isReadOnly, setIsReadOnly] = useState(true);
 
-  var projects = "1. Project A\n2. project B\n3. Project C";
+  var [projects, setProjects] = useState(
+    "1. Project A\n2. Project B\n3. Project C"
+  );
   var peopleYouLike = "1. User A\n2. User B\n3. User C";
   var peopleWhoLikeYou = "1. User A\n2. User B\n3. User C";
 
@@ -29,9 +31,18 @@ function Profile() {
     fetchUser();
   }, []);
 
+  // const handleEditClick = () => {
+  //   //setIsReadOnly(false);
+  //   onEditClick();
+  // };
+
   if (!user) {
     return <div>Loading...</div>;
   }
+
+  const handleProjectsChange = (event) => {
+    setProjects(event.target.value);
+  };
 
   return (
     <div className="profile">
@@ -77,9 +88,15 @@ function Profile() {
           id="profile__textarea"
           multiline
           rows={5}
-          defaultValue={peopleWhoLikeYou}
+          value={projects}
+          onChange={handleProjectsChange}
           variant="outlined"
           fullWidth
+          className={
+            isReadOnly
+              ? "profile__textarea-readonly"
+              : "profile__textarea-editable"
+          }
           InputProps={{
             readOnly: isReadOnly,
           }}
@@ -89,12 +106,10 @@ function Profile() {
           id="profile__textarea"
           multiline
           rows={5}
-          defaultValue={peopleWhoLikeYou}
+          defaultValue={peopleYouLike}
           variant="outlined"
           fullWidth
-          InputProps={{
-            readOnly: isReadOnly,
-          }}
+          className="profile__textarea-readonly"
         />
         <h3>People who like you</h3>
         <TextField
@@ -104,9 +119,7 @@ function Profile() {
           defaultValue={peopleWhoLikeYou}
           variant="outlined"
           fullWidth
-          InputProps={{
-            readOnly: isReadOnly,
-          }}
+          className="profile__textarea-readonly"
         />
       </div>
     </div>
