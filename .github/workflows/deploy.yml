@@ -15,6 +15,13 @@ jobs:
       - name: Create .env file
         run: |
           echo "DB_HOST=${{ secrets.DB_HOST }}" >> ./.env
+          echo "DB_USER=${{ secrets.DB_USER }}" >> ./.env
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> ./.env
+          echo "DB_DBNAME=${{ secrets.DB_DBNAME }}" >> ./.env
+          echo "DB_PORT=${{ secrets.DB_PORT }}" >> ./.env
+          echo "CLIENT_ID=${{ secrets.CLIENT_ID }}" >> ./.env
+          echo "CLIENT_SECRET=${{ secrets.CLIENT_SECRET }}" >> ./.env
+          echo "CALLBACK_URL=${{ secrets.CALLBACK_URL }}" >> ./.env
 
       # 도커 메타
       - name: Docker meta
