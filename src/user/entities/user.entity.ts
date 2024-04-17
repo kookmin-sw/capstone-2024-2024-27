@@ -30,4 +30,8 @@ export class User {
   @UpdateDateColumn({ type: 'timestamptz' })
   @Exclude()
   updatedAt: Date;
+
+  constructor(partial: Partial<User>) {
+    Object.assign(this, partial);
+  }
 }
