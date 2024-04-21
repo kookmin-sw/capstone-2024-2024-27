@@ -16,6 +16,14 @@ function Header({
   onEditClick,
   isReadOnly,
 }) {
+  const rightIcon = () => {
+    if (currentPage === "home") {
+      return <PersonIcon />;
+    } else {
+      return <HomeOutlinedIcon />;
+    }
+  };
+
   return (
     <div className="header">
       <IconButton
