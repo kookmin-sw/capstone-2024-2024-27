@@ -130,7 +130,7 @@ class ReactPanel {
 				<meta name="theme-color" content="#000000">
 				<title>React App</title>
 				<link rel="stylesheet" type="text/css" href="${styleUri}">
-				<meta http-equiv="Content-Security-Policy" content="default-src 'self' https://api.github.com; img-src vscode-resource: https:; script-src 'nonce-${nonce}' 'self' https://api.github.com;style-src vscode-resource: 'unsafe-inline' http: https: data:;">
+				<meta http-equiv="Content-Security-Policy" content="default-src 'self' https://api.github.com http://52.79.82.218; img-src vscode-resource: https:; script-src 'nonce-${nonce}' 'self' https://api.github.com http://52.79.82.218;style-src vscode-resource: 'unsafe-inline' http: https: data:; connect-src https://api.github.com http://52.79.82.218:8000;">
 				<base href="${vscode.Uri.file(path.join(this._extensionPath, "build")).with({
           scheme: "vscode-resource",
         })}/">
