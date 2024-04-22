@@ -3,11 +3,13 @@ import "./Profile.css";
 import axios from "axios";
 import TextField from "@material-ui/core/TextField";
 
-function Profile({ onEditClick, isReadOnly }) {
+function Profile(props) {
   const [user, setUser] = useState(null);
+  const accessToken = props.accessToken;
+  const isReadOnly = props.isReadOnly;
   //const [isReadOnly, setIsReadOnly] = useState(true);
 
-  var [projects, setProjects] = useState(
+  const [projects, setProjects] = useState(
     "1. Project A\n2. Project B\n3. Project C"
   );
   var peopleYouLike = "1. User A\n2. User B\n3. User C";
