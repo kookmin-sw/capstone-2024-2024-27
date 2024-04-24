@@ -1,55 +1,58 @@
 .header {
-  /* position: relative; */
   display: flex;
-  position: relative;
+  /* position: relative; */
   justify-content: space-between;
   align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  height: 60px;
 }
 
 .header__text {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+  color: black;
+  display: flex;
+  align-items: center;
 }
 
-.button .MuiIconButton-root {
-  /* IconButton (interaction 가능한 버튼) */
-  margin-right: auto;
+.logo {
+  height: 50px;
+  margin-right: 10px;
+  vertical-align: middle;
 }
 
-.button .MuiSvgIcon-root {
-  /* 안에 있는 사람 모양 */
-  width: 60px;
-  height: 60px;
-  color: white;
+.button .MuiIconButton-label {
+  /* color: rgba(128, 128, 128, 0.574); */
+  width: 50px;
+  height: 50px;
+  /* color: black !important; */
   border-radius: 80%;
-  background-color: rgba(128, 128, 128, 0.574);
-  box-shadow: 0px 10px 53px 0px rgba(0, 0, 0, 0.3);
+  padding: 4px;
+  /* background-color: rgba(128, 128, 128, 0.574); */
+  box-shadow: 0px 5px 50px 0px rgba(0, 0, 0, 0.3);
 }
 
-.edit__button .MuiIconButton-label {
-  /* Edit Button */
-  width: 60px;
-  height: 60px;
-  color: white;
-  border-radius: 80%;
-  background-color: rgba(128, 128, 128, 0.574);
-  box-shadow: 0px 10px 53px 0px rgba(0, 0, 0, 0.3);
+.home__icon,
+.exit__icon,
+.edit__icon,
+.done__icon,
+.person__icon {
+  width: 40px !important;
+  height: 40px !important;
+  font-size: "large";
+  color: black !important;
+  padding: 4vw !important;
 }
 
-.edit__button .MuiSvgIcon-root {
-  /* Edit Button */
-  width: 40px;
-  height: 40px;
-}
-
-.edit__button .doneIcon {
-  /* Edit Button */
-  width: 56px;
-  height: 56px;
-}
-
-.swipeButtons .MuiIconButton-root {
-  background-color: gray;
-  box-shadow: 0px 10px 53px 0px rgba(0, 0, 0, 0.3);
-}
+/* .done__icon {
+  width: 50px !important;
+  height: 50px !important;
+} */

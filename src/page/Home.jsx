@@ -4,8 +4,6 @@ import "./Home.css";
 import TinderCards from "../components/TinderCards";
 import SwipeButtons from "../components/SwipeButtons";
 
-import { useNavigate } from "react-router-dom";
-
 function Home() {
   const [people, setPeople] = useState([
     {
@@ -18,7 +16,7 @@ function Home() {
     },
     {
       name: "ahri",
-      url: require("../files/IMG_0870.jpeg"),
+      url: require("../assets/IMG_0870.jpeg"),
     },
   ]);
 
