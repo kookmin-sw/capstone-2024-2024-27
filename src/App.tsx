@@ -4,8 +4,8 @@ import "./App.css";
 import Profile from "./page/Profile";
 import Home from "./page/Home";
 import Header from "./components/Header";
-import Login from "./page/Login";
-import SignUp from "./page/SignUp";
+import Login from "./page/Login2";
+import SignUp from "./page/SignUp2";
 
 const App: React.FC = () => {
   const [isLoggedin, setIsLoggedin] = useState(false);
@@ -14,11 +14,13 @@ const App: React.FC = () => {
 
   const handleProfileClick = () => {
     setCurrentPage("profile");
+    setIsReadOnly(true);
     console.log("profile clicked");
   };
 
   const handleHomeClick = () => {
     setCurrentPage("home");
+    setIsReadOnly(true);
     console.log("home clicked");
   };
 
@@ -49,6 +51,11 @@ const App: React.FC = () => {
     console.log("signup success");
   };
 
+  const handleSignInClick = () => {
+    setCurrentPage("login");
+    console.log("sign in clicked");
+  };
+
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
     if (accessToken) {
@@ -67,15 +74,20 @@ const App: React.FC = () => {
         isLoggedin={isLoggedin}
         onLogout={handleLogout}
       />
-      {currentPage === "home" && isLoggedin ? (
-        <Home />
-      ) : currentPage === "profile" && isLoggedin ? (
-        <Profile onEditClick={handleEditClick} isReadOnly={isReadOnly} />
-      ) : currentPage === "login" ? (
-        <Login onLoginSuccess={handleLogin} onSignUpClick={handleSignUp} />
-      ) : (
-        <SignUp onSignUpSuccess={handleSignUpSuccess} />
-      )}
+      <div className="App-body">
+        {currentPage === "home" && isLoggedin ? (
+          <Home />
+        ) : currentPage === "profile" && isLoggedin ? (
+          <Profile onEditClick={handleEditClick} isReadOnly={isReadOnly} />
+        ) : currentPage === "login" ? (
+          <Login onLoginSuccess={handleLogin} onSignUpClick={handleSignUp} />
+        ) : (
+          <SignUp
+            onSignUpSuccess={handleSignUpSuccess}
+            onSignInClick={handleSignInClick}
+          />
+        )}
+      </div>
     </div>
   );
 };

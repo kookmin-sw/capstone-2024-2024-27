@@ -1,14 +1,15 @@
 import React from "react";
 import "./Header.css";
+// import logo from "../assets/Logo_color.svg";
+import Logo from "./Logo";
+
+import { makeStyles } from "@material-ui/core/styles";
 import PersonIcon from "@material-ui/icons/Person";
 import IconButton from "@material-ui/core/IconButton";
 import EditIcon from "@material-ui/icons/Edit";
 import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
 import DoneIcon from "@material-ui/icons/Done";
-import ExitToAppRounded from "@material-ui/icons/ExitToAppRounded";
-// import { Link, useHistory } from "react-router-dom";
-// import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
-// import NotificationsNoneOutlinedIcon from "@material-ui/icons/NotificationsNoneOutlined";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 
 function Header({
   currentPage,
@@ -21,6 +22,10 @@ function Header({
 }) {
   return (
     <div className="header">
+      <h1 className="header__text">
+        <Logo />
+        Codate
+      </h1>
       {isLoggedin && (
         <>
           {isLoggedin &&
@@ -30,20 +35,30 @@ function Header({
                 className="button"
                 onClick={currentPage === "home" ? onProfileClick : onHomeClick}
               >
-                {currentPage === "home" ? <PersonIcon /> : <HomeOutlinedIcon />}
+                {currentPage === "home" ? (
+                  <PersonIcon className="person__icon" />
+                ) : (
+                  <HomeOutlinedIcon className="home__icon" />
+                )}
               </IconButton>
             )}
-          <h1 className="header__text">Codate</h1>
+
           {currentPage === "profile" && (
-            <IconButton className="edit__button" onClick={onEditClick}>
-              {isReadOnly ? <EditIcon /> : <DoneIcon className="doneIcon" />}
+            <IconButton className="button" onClick={onEditClick}>
+              {isReadOnly ? (
+                <EditIcon className="edit__icon" />
+              ) : (
+                <DoneIcon className="done__icon" />
+              )}
             </IconButton>
           )}
-          {/* {isLoggedin(
+          {currentPage === "home" ? (
             <IconButton className="button" onClick={onLogout}>
-              <ExitToAppRounded />
+              <ExitToAppIcon className="exit__icon" />
             </IconButton>
-          )} */}
+          ) : (
+            <></>
+          )}
         </>
       )}
     </div>
