@@ -1,0 +1,46 @@
+프로필 작성 시 보내는 정보
+{
+  "name": "Robin",
+  "githubLink": "https://github.com/belyllium",
+  "image": "image",
+  "title": "Codate",
+  "description": "나랑 같이 개발자 데이팅 앱 만들 사람 찾아요"
+}
+
+
+프로필 작성 완료시 또는 프로필 화면 진입 시 받는 정보
+{
+  "name": "Robin",
+  "githubLink": "https://github.com/belyllium",
+  "image": "https://example.com/profile-image.jpg",
+  "title": "Codate",
+  "description": "나랑 같이 개발자 데이팅 앱 만들 사람 찾아요",
+  "likedByUsers": [
+    {
+      "id": 2,
+      "name": "이승원",
+      "title": "title",
+      "githubLink": "https://github.com/KMUlee"
+    },
+    {
+      "id": 1,
+      "name": "홍길동",
+      "title": "title",
+      "githubLink": "https://github.com/meow"
+    }
+  ],
+  "likedProjects": [
+    {
+      "id": 2,
+      "name": "이철수",
+      "title": "title",
+      "githubLink": "https://github.com/meow"
+    },
+    {
+      "id": 1,
+      "name": "박지영",
+      "title": "title",
+      "githubLink": "https://github.com/meow"
+    }
+  ]
+}
