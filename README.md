@@ -24,7 +24,7 @@ VSCode Extension을 통하여 Side Project를 함께 진행할 사람을 간편�
 | 이름       | 학번     | 포지션                     | 프로필 사진                                                                                                                              | 깃허브                                                       |
 | ---------- | -------- | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
 | **이승원** | 20181662 | <center>Back-end</center>  | <img src="https://github.com/kookmin-sw/capstone-2024-27/assets/89867182/5567f75a-4c3c-47b8-8fef-952a812737c4" width="100" height=auto/> | [https://github.com/KMUlee](https://github.com/KMUlee)       |
-| **손동석** | 20182085 | <center>Front-end</center> | <img src="https://github.com/kookmin-sw/capstone-2024-27/assets/89867182/703dfcb4-516e-4ef6-ac8c-60c888e5bd79" width="100" height=auto/> | [https://github.com/belyllium](https://github.com/dongseokSon) |
+| **손동석** | 20182085 | <center>Front-end</center> | <img src="https://github.com/kookmin-sw/capstone-2024-27/assets/89867182/703dfcb4-516e-4ef6-ac8c-60c888e5bd79" width="100" height=auto/> | [https://github.com/dongseokSon](https://github.com/dongseokSon) |
 
 ## 4. 사용법
 
