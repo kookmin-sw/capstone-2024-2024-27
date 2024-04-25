@@ -32,7 +32,13 @@ export class ProfileDto {
   readonly githubLink: string;
 }
 
-export class GetProfileDto extends ProfileDto {
+export class GetProfileDto {
+  @Type(() => ProfileDto)
+  @ApiProperty({
+    type: ProfileDto,
+  })
+  readonly profile: ProfileDto;
+
   @Type(() => ProfileDto)
   @ApiProperty({
     type: [ProfileDto],

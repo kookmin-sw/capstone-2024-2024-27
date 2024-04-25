@@ -52,7 +52,7 @@ export class ProfileService {
       likedByUsers.push(likedProfile);
     });
     const profileData: GetProfileDto = {
-      ...profile,
+      profile,
       likedProjects,
       likedByUsers,
     };

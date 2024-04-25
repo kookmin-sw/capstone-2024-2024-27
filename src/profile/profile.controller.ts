@@ -12,7 +12,13 @@ import { ProfileService } from './profile.service';
 import { JwtAuthGuard } from 'src/user/user.guard';
 import { GetUser } from 'src/user/decorators/GetUser.decorator';
 import { Payload } from 'src/user/dto/jwt-payload.dto';
-import { ApiBearerAuth, ApiBody, ApiParam, ApiResponse } from '@nestjs/swagger';
+import {
+  ApiBearerAuth,
+  ApiBody,
+  ApiParam,
+  ApiResponse,
+  getSchemaPath,
+} from '@nestjs/swagger';
 import { GetProfileDto, ProfileDto } from './dto/profile.dto';
 
 @Controller('profile')
@@ -35,13 +41,13 @@ export class ProfileController {
   async getProfile(
     @Param('id') id: number,
     @GetUser() user: Payload,
-  ): Promise<{ profile: GetProfileDto | null }> {
+  ): Promise<GetProfileDto | null> {
     if (id !== user.userId) {
       throw new ForbiddenException(
         'You do not have permission to access this profile',
       );
     }
-    return { profile: await this.profileService.getProfile(id) };
+    return await this.profileService.getProfile(id);
   }
 
   @Post('/:id')
