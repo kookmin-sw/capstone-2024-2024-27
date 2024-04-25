@@ -1,20 +1,20 @@
 import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
 import { CreateUserDto, UserDto } from './dto/user.dto';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { Payload } from './dto/jwt-payload.dto';
+import { User } from './entities/user.entity';
 
 @Injectable()
 export class UserService {
   private readonly logger = new Logger(UserService.name);
   constructor(
     @InjectRepository(User)
-    private userRepository: Repository<User>,
-    private configService: ConfigService,
-    private jwtService: JwtService,
+    private readonly userRepository: Repository<User>,
+    private readonly configService: ConfigService,
+    private readonly jwtService: JwtService,
   ) {}
   async createOne(newUser: CreateUserDto): Promise<User> {
     const user = await this.userRepository.findOneBy({ email: newUser.email });
@@ -55,5 +55,19 @@ export class UserService {
         secret: this.configService.get<string>('JWT_SECRET_KEY'),
       }),
     };
+  }
+
+  async getLikedList(userId: number): Promise<number[] | []> {
+    const user = await this.userRepository.findOne({
+      where: {
+        id: userId,
+      },
+      relations: ['likesList'],
+    });
+    return user.likesList.map((like) => like.profileId);
+  }
+
+  async findOneById(id: number): Promise<User> {
+    return this.userRepository.findOneBy({ id });
   }
 }

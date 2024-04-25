@@ -1,10 +1,12 @@
 import { Exclude } from 'class-transformer';
 import { Likes } from 'src/likes/entities/likes.entity';
+import { Profile } from 'src/profile/entities/profile.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -12,6 +14,7 @@ import {
 @Entity()
 export class User {
   @PrimaryGeneratedColumn()
+  @Exclude()
   id: number;
 
   @Column()
@@ -22,6 +25,9 @@ export class User {
 
   @OneToMany(() => Likes, (likes) => likes.user)
   likesList: Likes[];
+
+  @OneToOne(() => Profile, (profile) => profile.user)
+  profile: Profile;
 
   @CreateDateColumn({ type: 'timestamptz' })
   @Exclude()

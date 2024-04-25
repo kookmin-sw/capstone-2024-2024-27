@@ -1,3 +1,4 @@
+import { Exclude } from 'class-transformer';
 import { User } from 'src/user/entities/user.entity';
 import {
   Column,
@@ -17,11 +18,13 @@ export class Likes {
   user: User;
 
   @Column()
-  projectId: number;
+  profileId: number;
 
   @CreateDateColumn({ type: 'timestamptz' })
+  @Exclude()
   createdAt: Date;
 
   @UpdateDateColumn({ type: 'timestamptz' })
+  @Exclude()
   updatedAt: Date;
 }
