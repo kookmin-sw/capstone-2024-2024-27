@@ -34,10 +34,14 @@ export class ProfileDto {
 
 export class GetProfileDto extends ProfileDto {
   @Type(() => ProfileDto)
-  @ApiProperty()
+  @ApiProperty({
+    type: [ProfileDto],
+  })
   likedByUsers: ProfileDto[] | [];
 
   @Type(() => ProfileDto)
-  @ApiProperty()
+  @ApiProperty({
+    type: [ProfileDto],
+  })
   likedProjects: ProfileDto[] | [];
 }

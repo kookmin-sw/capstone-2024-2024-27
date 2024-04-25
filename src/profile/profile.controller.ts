@@ -12,7 +12,7 @@ import { ProfileService } from './profile.service';
 import { JwtAuthGuard } from 'src/user/user.guard';
 import { GetUser } from 'src/user/decorators/GetUser.decorator';
 import { Payload } from 'src/user/dto/jwt-payload.dto';
-import { ApiBearerAuth } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiBody, ApiParam, ApiResponse } from '@nestjs/swagger';
 import { GetProfileDto, ProfileDto } from './dto/profile.dto';
 
 @Controller('profile')
@@ -22,6 +22,16 @@ export class ProfileController {
   constructor(private readonly profileService: ProfileService) {}
 
   @Get('/:id')
+  @ApiParam({
+    name: 'id',
+    description: 'userId',
+    type: 'number',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Get a profile',
+    type: GetProfileDto,
+  })
   async getProfile(
     @Param('id') id: number,
     @GetUser() user: Payload,
@@ -35,6 +45,20 @@ export class ProfileController {
   }
 
   @Post('/:id')
+  @ApiParam({
+    name: 'id',
+    description: 'userId',
+    type: 'number',
+  })
+  @ApiBody({
+    description: 'Create a profile',
+    type: ProfileDto,
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Get a profile',
+    type: ProfileDto,
+  })
   async createProfile(
     @Param('id') id: number,
     @GetUser() user: Payload,
@@ -49,6 +73,20 @@ export class ProfileController {
   }
 
   @Put('/:id')
+  @ApiParam({
+    name: 'id',
+    description: 'userId',
+    type: 'number',
+  })
+  @ApiBody({
+    description: 'Create a profile',
+    type: ProfileDto,
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Get a profile',
+    type: ProfileDto,
+  })
   async updateProfile(
     @Param('id') id: number,
     @GetUser() user: Payload,
