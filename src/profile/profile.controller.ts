@@ -53,7 +53,12 @@ export class ProfileController {
     @Param('id') id: number,
     @GetUser() user: Payload,
     @Body() profile: ProfileDto,
-  ) {
+  ): Promise<ProfileDto> {
+    if (id !== user.userId) {
+      throw new ForbiddenException(
+        'You do not have permission to update this profile',
+      );
+    }
     return await this.profileService.updateProfile(id, profile);
   }
 }
