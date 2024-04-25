@@ -37,8 +37,8 @@ export class ProfileController {
     type: ProfileDto,
   })
   @ApiResponse({
-    status: 200,
-    description: 'Get a profile',
+    status: 201,
+    description: 'Create a profile',
     type: ProfileDto,
   })
   async createProfile(
@@ -54,8 +54,8 @@ export class ProfileController {
     type: ProfileDto,
   })
   @ApiResponse({
-    status: 200,
-    description: 'Get a profile',
+    status: 201,
+    description: 'Update a profile',
     type: ProfileDto,
   })
   async updateProfile(
@@ -63,5 +63,19 @@ export class ProfileController {
     @Body() profile: ProfileDto,
   ): Promise<ProfileDto> {
     return await this.profileService.updateProfile(user.userId, profile);
+  }
+
+  @Get('/:profileId')
+  @ApiParam({
+    name: 'profileId',
+    type: 'number',
+  })
+  @ApiResponse({
+    status: 200,
+    description: 'Get a profile',
+    type: ProfileDto,
+  })
+  async getProfileById(@Param('profileId') id: number): Promise<ProfileDto> {
+    return await this.profileService.getProfileById(id);
   }
 }
