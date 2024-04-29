@@ -96,4 +96,16 @@ export class ProfileService {
       );
     }
   }
+
+  async getProfileById(id: number): Promise<ProfileDto> {
+    const profile = await this.profileRepository.findOne({
+      where: {
+        id,
+      },
+    });
+    if (!profile) {
+      throw new HttpException('Profile not found', HttpStatus.NOT_FOUND);
+    }
+    return profile;
+  }
 }
