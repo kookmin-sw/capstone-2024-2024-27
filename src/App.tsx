@@ -7,6 +7,7 @@ import Home from "./page/Home";
 import Header from "./components/Header";
 import Login from "./page/Login2";
 import SignUp from "./page/SignUp2";
+import { profile } from "console";
 
 const saveProfileData = async (
   name: string,
@@ -62,8 +63,11 @@ const App: React.FC = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [githubLink, setGithubLink] = useState("");
-  const [projectsYouLike, setProjectsYouLike] = useState("");
-  const [peopleWhoLikeYou, setPeopleWhoLikeYou] = useState("");
+  const [profileImage, setProfileImage] = useState("");
+  const [likedProjects, setLikedProjects] = useState([]);
+  const [likedByUsers, setLikedByUsers] = useState([]);
+
+  const [index, setIndex] = useState(0);
 
   const handleProfileClick = () => {
     setCurrentPage("profile");
@@ -135,6 +139,10 @@ const App: React.FC = () => {
       setTitle(profileData.profile.title);
       setDescription(profileData.profile.description);
       setGithubLink(profileData.profile.githubLink);
+
+      setLikedByUsers(profileData.likedByUsers);
+      setLikedProjects(profileData.likedProjects);
+
       console.log("138 fetchProfileData: ", profileData);
     } catch (error) {
       console.error("Error fetching profile:", error);
@@ -168,7 +176,12 @@ const App: React.FC = () => {
       />
       <div className="App-body">
         {currentPage === "home" && isLoggedin ? (
-          <Home />
+          <Home
+            name={name}
+            title={title}
+            description={description}
+            profineImage={profileImage}
+          />
         ) : currentPage === "profile" && isLoggedin ? (
           <Profile
             name={name}
@@ -179,8 +192,9 @@ const App: React.FC = () => {
             setDescription={setDescription}
             githubLink={githubLink}
             setGithubLink={setGithubLink}
-            projectsYouLike={projectsYouLike}
-            peopleWhoLikeYou={peopleWhoLikeYou}
+            profileImage={profileImage}
+            likedProjects={likedProjects}
+            likedByUsers={likedByUsers}
             isReadOnly={isReadOnly}
             // onEditClick={handleEditClick}
             // onSaveClick={handleSaveClick}

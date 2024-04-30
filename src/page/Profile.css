@@ -5,17 +5,18 @@
 }
 
 .profile__header {
+  margin: 20px;
   display: flex;
   align-items: center;
   margin-bottom: 40px;
 }
 
 .profile__avatar {
-  width: 160px;
+  width: 120px;
   height: 100%;
-  margin-right: 2vw;
+  margin-right: 4vw;
   /* flex-shrink: 0; */
-  padding-left: 20px;
+  padding-left: 0px;
 }
 
 .profile__user-info {

@@ -3,6 +3,9 @@ import "./Profile.css";
 import axios from "axios";
 import TextField from "@material-ui/core/TextField";
 import { saveProfile, fetchProfile } from "../utils/profileApi";
+import MyTextField from "../components/MyTextField";
+
+const defaultImage = "sample_profile.png";
 
 function Profile({
   name,
@@ -13,8 +16,9 @@ function Profile({
   setDescription,
   githubLink,
   setGithubLink,
-  projectsYouLike,
-  peopleWhoLikeYou,
+  profileImage,
+  likedProjects,
+  likedByUsers,
   isReadOnly,
 }) {
   return (
@@ -22,7 +26,7 @@ function Profile({
       <div className="profile__header">
         <img
           className="profile__avatar"
-          src="IMG_0870.jpeg"
+          src={profileImage || defaultImage}
           alt="User Avatar"
         />
         <div className="profile__user-info">
@@ -64,17 +68,28 @@ function Profile({
           <TextField
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            InputProps={{ readOnly: isReadOnly, style: { height: "" } }}
+            InputProps={{
+              readOnly: isReadOnly,
+              style: {
+                height: "",
+                backgroundColor: isReadOnly ? "#f0f0f0" : "#fff",
+              },
+            }}
             variant="outlined"
             fullWidth
-            className={
-              isReadOnly
-                ? "profile__textarea-readonly"
-                : "profile__textarea-editable"
-            }
+            // className={
+            //   isReadOnly
+            //     ? "profile__textarea-readonly"
+            //     : "profile__textarea-editable"
+            // }
           />
         </div>
         <h3>Project you want to do</h3>
+        <MyTextField
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          isReadOnly={isReadOnly}
+        />
         <TextField
           id="profile__textarea"
           multiline
@@ -97,7 +112,9 @@ function Profile({
           id="profile__textarea"
           multiline
           minRows={5}
-          defaultValue={projectsYouLike}
+          defaultValue={likedProjects
+            .map((user) => `${user.name}: ${user.title}`)
+            .join("\n")}
           variant="outlined"
           fullWidth
           className="profile__textarea-readonly profile__textarea-scrollable"
@@ -107,7 +124,9 @@ function Profile({
           id="profile__textarea"
           multiline
           minRows={5}
-          defaultValue={peopleWhoLikeYou}
+          defaultValue={likedByUsers
+            .map((user) => `${user.name}: ${user.title}`)
+            .join("\n")}
           variant="outlined"
           fullWidth
           className="profile__textarea-readonly profile__textarea-scrollable"

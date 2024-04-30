@@ -4,7 +4,7 @@ import "./Home.css";
 import TinderCards from "../components/TinderCards";
 import SwipeButtons from "../components/SwipeButtons";
 
-function Home() {
+function Home({ name, title, description, profineImage }) {
   const [people, setPeople] = useState([
     {
       name: "steve jobs",
