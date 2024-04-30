@@ -40,19 +40,15 @@
   box-shadow: 0px 5px 50px 0px rgba(0, 0, 0, 0.3);
 }
 
-.home__icon,
-.exit__icon,
-.edit__icon,
-.done__icon,
-.person__icon {
-  width: 40px !important;
-  height: 40px !important;
+.home__icon .MuiSvgIcon-root,
+.exit__icon .MuiSvgIcon-root,
+.edit__icon .MuiSvgIcon-root,
+.done__icon .MuiSvgIcon-root,
+.person__icon .MuiSvgIcon-root {
+  width: 60px !important;
+  height: 60px !important;
   font-size: "large";
   color: black !important;
+  /* background-color: white !important; */
   padding: 4vw !important;
 }
-
-/* .done__icon {
-  width: 50px !important;
-  height: 50px !important;
-} */
