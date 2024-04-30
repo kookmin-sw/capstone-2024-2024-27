@@ -1,7 +1,7 @@
 import React from "react";
 import "./Header.css";
 // import logo from "../assets/Logo_color.svg";
-import Logo from "./Logo";
+// import Logo from "./Logo";
 
 import { makeStyles } from "@material-ui/core/styles";
 import PersonIcon from "@material-ui/icons/Person";
@@ -16,6 +16,7 @@ function Header({
   onProfileClick,
   onHomeClick,
   onEditClick,
+  onSaveClick,
   isReadOnly,
   isLoggedin,
   onLogout,
@@ -23,7 +24,7 @@ function Header({
   return (
     <div className="header">
       <h1 className="header__text">
-        <Logo />
+        <img src="Logo_color.svg" alt="Logo" className="logo"></img>
         Codate
       </h1>
       {isLoggedin && (
@@ -44,7 +45,10 @@ function Header({
             )}
 
           {currentPage === "profile" && (
-            <IconButton className="button" onClick={onEditClick}>
+            <IconButton
+              className="button"
+              onClick={isReadOnly ? onEditClick : onSaveClick}
+            >
               {isReadOnly ? (
                 <EditIcon className="edit__icon" />
               ) : (

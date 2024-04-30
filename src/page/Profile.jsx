@@ -2,126 +2,115 @@ import React, { useState, useEffect } from "react";
 import "./Profile.css";
 import axios from "axios";
 import TextField from "@material-ui/core/TextField";
+import { saveProfile, fetchProfile } from "../utils/profileApi";
 
-function Profile(props) {
-  const [user, setUser] = useState(null);
-  const accessToken = props.accessToken;
-  const isReadOnly = props.isReadOnly;
-  //const [isReadOnly, setIsReadOnly] = useState(true);
-
-  const [projects, setProjects] = useState(
-    "1. Project A\n2. Project B\n3. Project C"
-  );
-  var peopleYouLike = "1. User A\n2. User B\n3. User C";
-  var peopleWhoLikeYou = "1. User A\n2. User B\n3. User C";
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const response = await axios.get("https://api.github.com/user", {
-          headers: {
-            Authorization: `Bearer ${process.env.REACT_APP_GITHUB_ACCESS_TOKEN}`,
-          },
-        });
-        setUser(response.data);
-      } catch (error) {
-        console.log("current token", process.env.REACT_APP_GITHUB_ACCESS_TOKEN);
-        console.error("Error fetching user data:", error);
-      }
-    };
-
-    fetchUser();
-  }, []);
-
-  // const handleEditClick = () => {
-  //   //setIsReadOnly(false);
-  //   onEditClick();
-  // };
-
-  if (!user) {
-    return <div>Loading...</div>;
-  }
-
-  const handleProjectsChange = (event) => {
-    setProjects(event.target.value);
-  };
-
+function Profile({
+  name,
+  setName,
+  title,
+  setTitle,
+  description,
+  setDescription,
+  githubLink,
+  setGithubLink,
+  projectsYouLike,
+  peopleWhoLikeYou,
+  isReadOnly,
+}) {
   return (
     <div className="profile">
       <div className="profile__header">
         <img
           className="profile__avatar"
-          src={user.avatar_url}
+          src="IMG_0870.jpeg"
           alt="User Avatar"
         />
         <div className="profile__user-info">
-          <span className="profile__label">Username: </span>
-          {user.name}
+          <span className="profile__label">USERNAME: </span>
+          <TextField
+            id="profile__textarea"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            InputProps={{ readOnly: isReadOnly }}
+            variant="outlined"
+            className={
+              isReadOnly
+                ? "profile__textarea-readonly"
+                : "profile__textarea-editable"
+            }
+          />
           <div className="profile__link">
             <span className="profile__label">Github Link: </span>{" "}
-            <a href={user.html_url} target="_blank" rel="noopener noreferrer">
-              {user.html_url}
-            </a>
+            <TextField
+              id="profile__textarea"
+              value={githubLink}
+              onChange={(e) => setGithubLink(e.target.value)}
+              InputProps={{ readOnly: isReadOnly }}
+              variant="outlined"
+              fullWidth
+              className={
+                isReadOnly
+                  ? "profile__textarea-readonly"
+                  : "profile__textarea-editable"
+              }
+            />
           </div>
         </div>
       </div>
 
       <div className="profile__section">
-        {/* <h3>Projects you want to do</h3>
-        <textarea
-          className="profile__textarea"
-          readOnly={isReadOnly}
-          value={projects}
-        />
-        <h3>People you like</h3>
-        <textarea
-          className="profile__textarea"
-          readOnly={isReadOnly}
-          value={peopleYouLike}
-        />
-        <h3>People who like you</h3>
-        <textarea
-          className="profile__textarea"
-          readOnly={isReadOnly}
-          value={peopleWhoLikeYou}
-        /> */}
-        <h3>Projects you want to do</h3>
+        <span className="profile__label">Project Title </span>
+        <div className="profile__title">
+          <TextField
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            InputProps={{ readOnly: isReadOnly, style: { height: "" } }}
+            variant="outlined"
+            fullWidth
+            className={
+              isReadOnly
+                ? "profile__textarea-readonly"
+                : "profile__textarea-editable"
+            }
+          />
+        </div>
+        <h3>Project you want to do</h3>
         <TextField
           id="profile__textarea"
           multiline
-          rows={5}
-          value={projects}
-          onChange={handleProjectsChange}
+          minRows={5}
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
           variant="outlined"
           fullWidth
           className={
             isReadOnly
-              ? "profile__textarea-readonly"
-              : "profile__textarea-editable"
+              ? "profile__textarea-readonly profile__textarea-scrollable"
+              : "profile__textarea-editable profile__textarea-scrollable"
           }
           InputProps={{
             readOnly: isReadOnly,
           }}
         />
-        <h3>People you like</h3>
+        <h3>Projects you like</h3>
         <TextField
           id="profile__textarea"
           multiline
-          rows={5}
-          defaultValue={peopleYouLike}
+          minRows={5}
+          defaultValue={projectsYouLike}
           variant="outlined"
           fullWidth
-          className="profile__textarea-readonly"
+          className="profile__textarea-readonly profile__textarea-scrollable"
         />
-        <h3>People who like you</h3>
+        <h3>People who like your project.</h3>
         <TextField
           id="profile__textarea"
           multiline
-          rows={5}
+          minRows={5}
           defaultValue={peopleWhoLikeYou}
           variant="outlined"
           fullWidth
-          className="profile__textarea-readonly"
+          className="profile__textarea-readonly profile__textarea-scrollable"
         />
       </div>
     </div>
