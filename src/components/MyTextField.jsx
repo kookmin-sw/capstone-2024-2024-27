@@ -1,30 +1,39 @@
 import React from "react";
 
 import TextField from "@material-ui/core/TextField";
+function emptyFunction() {}
 
 function MyTextField({
   value = "",
   defaultValue = "",
-  minRows = 5,
+  onChange = emptyFunction,
+  placeholder = "(Empty)",
+  minRows = 1,
+  maxRows = 2,
   isReadOnly = true,
+  fontSize = 20,
+  backgroundColor = "",
   scrollable = false,
-  onChange = {},
 }) {
+  const bgColor = backgroundColor || (isReadOnly ? "#f0f0f0" : "#ffffff");
+
   return (
     <div>
       <TextField
         minRows={minRows}
+        maxRows={maxRows}
         value={value}
         defaultValue={defaultValue}
         onChange={onChange}
-        placeholder="(Empty)"
+        placeholder={placeholder}
         inputProps={{
           readOnly: isReadOnly,
           overflow: scrollable ? "auto" : "hidden",
         }}
         style={{
-          backgroundColor: isReadOnly ? "#f0f0f0" : "#ffffff",
+          backgroundColor: bgColor,
           // border: "1px solid #ccc",
+          fontSize: { fontSize },
         }}
         variant="outlined"
         multiline

@@ -3,8 +3,9 @@ import "./Home.css";
 
 import TinderCards from "../components/TinderCards";
 import SwipeButtons from "../components/SwipeButtons";
+import MyTextField from "../components/MyTextField";
 
-function Home({ name, title, description, profineImage }) {
+function Home({ project, profineImage, handleLike, handleDislike }) {
   const [people, setPeople] = useState([
     {
       name: "steve jobs",
@@ -21,18 +22,37 @@ function Home({ name, title, description, profineImage }) {
   ]);
 
   const [currentIndex, setCurrentIndex] = useState(0);
-  const handleButtonClick = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % people.length);
-  };
+  // const handleButtonClick = () => {
+  //   setCurrentIndex((prevIndex) => (prevIndex + 1) % people.length);
+  // };
 
   return (
     <div className="home">
-      <h1>Project Title</h1>
+      {/* <Title defalutValue={title} /> */}
+      {project.title ? (
+        <>
+          <h2>{project.title}</h2>
+          <h1>{project.name}</h1>
+        </>
+      ) : (
+        <h1>(Please edit your profile.)</h1>
+      )}
+
+      {/* <MyTextField value={title} /> */}
       <TinderCards people={people[currentIndex]} />
-      <div className="home__textbox">
-        <textarea readOnly value="프로젝트 설명" />
+      <div className="home__description">
+        <MyTextField
+          value={project.description}
+          backgroundColor="white"
+          minRows={5}
+          maxRows={10}
+        />
       </div>
-      <SwipeButtons onButtonClick={handleButtonClick} />
+      <SwipeButtons
+        className="home__buttons"
+        onLikeButtonClick={handleLike}
+        onDislikeButtonClick={handleDislike}
+      />
     </div>
   );
 }

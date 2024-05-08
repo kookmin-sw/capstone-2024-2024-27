@@ -12,7 +12,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import axios from "axios";
+import { api } from "../utils/api";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -60,13 +60,10 @@ export default function SignUp({ onSignUpSuccess, onSignInClick }) {
     }
 
     try {
-      const response = await axios.post(
-        "http://52.79.82.218:8000/user/signup",
-        {
-          email,
-          password,
-        }
-      );
+      const response = await api.post("http://52.79.82.218:8000/user/signup", {
+        email,
+        password,
+      });
 
       if (response.status === 201) {
         alert("User successfully created! Please log in.");
