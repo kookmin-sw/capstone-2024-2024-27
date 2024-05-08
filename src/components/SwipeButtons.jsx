@@ -8,13 +8,13 @@ import IconButton from "@material-ui/core/IconButton";
 
 import "./SwipeButtons.css";
 
-const SwipeButtons = ({ onButtonClick }) => {
+const SwipeButtons = ({ onLikeButtonClick, onDislikeButtonClick }) => {
   return (
     <div className="swipeButtons">
-      <IconButton className="swipeButtons__left" onClick={onButtonClick}>
+      <IconButton className="swipeButtons__left" onClick={onDislikeButtonClick}>
         <CloseIcon fontSize="large" />
       </IconButton>
-      <IconButton className="swipeButtons__right" onClick={onButtonClick}>
+      <IconButton className="swipeButtons__right" onClick={onLikeButtonClick}>
         <FavoriteIcon fontSize="large" />
       </IconButton>
     </div>

@@ -1,11 +1,19 @@
-.App {
-  position: flex;
+.App .App-body {
+  /* display: flex; */
+  /* flex-direction: column; */
+  align-items: center;
+  justify-content: space-between;
   text-align: center;
+  /* flex-grow: 1 !important; */
+}
+
+.App {
+  /* position: flex; */
   height: 160px;
   /* background-color: white !important; */
 }
 
 .App-body {
-  margin-top: 100px;
+  margin-top: 80px;
   /* background-color: white !important; */
 }

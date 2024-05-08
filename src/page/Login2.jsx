@@ -12,7 +12,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
-import axios from "axios";
+import { api } from "../utils/api";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -39,15 +39,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SignIn({ onLoginSuccess, onSignUpClick }) {
+export default function Login({ onLoginSuccess, onSignUpClick }) {
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleLogin = async (e) => {
+    console.log("Login button clicked!");
     e.preventDefault();
     try {
-      const response = await axios.post("http://52.79.82.218:8000/user/login", {
+      const response = await api.post("http://52.79.82.218:8000/user/login", {
         email,
         password,
       });
@@ -68,7 +69,7 @@ export default function SignIn({ onLoginSuccess, onSignUpClick }) {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign in
+          Login
         </Typography>
         <form className={classes.form} onSubmit={handleLogin}>
           <TextField
@@ -104,7 +105,7 @@ export default function SignIn({ onLoginSuccess, onSignUpClick }) {
             color="primary"
             className={classes.submit}
           >
-            Sign In
+            Log In
           </Button>
           <Grid container>
             <Grid item xs></Grid>

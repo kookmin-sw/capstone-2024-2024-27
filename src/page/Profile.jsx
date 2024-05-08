@@ -2,7 +2,11 @@ import React, { useState, useEffect } from "react";
 import "./Profile.css";
 import axios from "axios";
 import TextField from "@material-ui/core/TextField";
-import { saveProfile, fetchProfile } from "../utils/profileApi";
+import { saveProfile, fetchProfile } from "../utils/api";
+import MyTextField from "../components/MyTextField";
+
+const defaultImage = "sample_profile.png";
+const maxRows = 6;
 
 function Profile({
   name,
@@ -13,106 +17,82 @@ function Profile({
   setDescription,
   githubLink,
   setGithubLink,
-  projectsYouLike,
-  peopleWhoLikeYou,
+  profileImage,
+  likedProjects,
+  likedByUsers,
   isReadOnly,
 }) {
+  const formatProjects = (projects) =>
+    projects
+      .filter((p) => p)
+      .map((p) => `${p.name}: ${p.title}, ${p.githubLink}`)
+      .join("\n");
+
   return (
     <div className="profile">
       <div className="profile__header">
         <img
           className="profile__avatar"
-          src="IMG_0870.jpeg"
+          src={profileImage || defaultImage}
           alt="User Avatar"
         />
         <div className="profile__user-info">
           <span className="profile__label">USERNAME: </span>
-          <TextField
-            id="profile__textarea"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            InputProps={{ readOnly: isReadOnly }}
-            variant="outlined"
-            className={
-              isReadOnly
-                ? "profile__textarea-readonly"
-                : "profile__textarea-editable"
-            }
-          />
+          <div className="info__field">
+            <MyTextField
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              isReadOnly={isReadOnly}
+            />
+          </div>
           <div className="profile__link">
             <span className="profile__label">Github Link: </span>{" "}
-            <TextField
-              id="profile__textarea"
-              value={githubLink}
-              onChange={(e) => setGithubLink(e.target.value)}
-              InputProps={{ readOnly: isReadOnly }}
-              variant="outlined"
-              fullWidth
-              className={
-                isReadOnly
-                  ? "profile__textarea-readonly"
-                  : "profile__textarea-editable"
-              }
-            />
+            <div className="info">
+              <MyTextField
+                value={githubLink}
+                onChange={(e) => setGithubLink(e.target.value)}
+                isReadOnly={isReadOnly}
+              />
+            </div>
           </div>
         </div>
       </div>
+      {/* profile header */}
 
       <div className="profile__section">
-        <span className="profile__label">Project Title </span>
+        <h3>Project Title </h3>
         <div className="profile__title">
-          <TextField
+          <MyTextField
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            InputProps={{ readOnly: isReadOnly, style: { height: "" } }}
-            variant="outlined"
-            fullWidth
-            className={
-              isReadOnly
-                ? "profile__textarea-readonly"
-                : "profile__textarea-editable"
-            }
+            maxRows={1}
+            isReadOnly={isReadOnly}
           />
         </div>
         <h3>Project you want to do</h3>
-        <TextField
-          id="profile__textarea"
-          multiline
-          minRows={5}
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          variant="outlined"
-          fullWidth
-          className={
-            isReadOnly
-              ? "profile__textarea-readonly profile__textarea-scrollable"
-              : "profile__textarea-editable profile__textarea-scrollable"
-          }
-          InputProps={{
-            readOnly: isReadOnly,
-          }}
-        />
-        <h3>Projects you like</h3>
-        <TextField
-          id="profile__textarea"
-          multiline
-          minRows={5}
-          defaultValue={projectsYouLike}
-          variant="outlined"
-          fullWidth
-          className="profile__textarea-readonly profile__textarea-scrollable"
-        />
-        <h3>People who like your project.</h3>
-        <TextField
-          id="profile__textarea"
-          multiline
-          minRows={5}
-          defaultValue={peopleWhoLikeYou}
-          variant="outlined"
-          fullWidth
-          className="profile__textarea-readonly profile__textarea-scrollable"
-        />
+        <div className="profile__contents">
+          <MyTextField
+            value={description}
+            maxRows={maxRows}
+            onChange={(e) => setDescription(e.target.value)}
+            isReadOnly={isReadOnly}
+            scrollable={true}
+          />
+          <h3>Projects you like</h3>
+          <MyTextField
+            value={formatProjects(likedProjects)}
+            maxRows={maxRows}
+            scrollable={true}
+          />
+          <h3>People who like your project.</h3>
+          <MyTextField
+            value={formatProjects(likedByUsers)}
+            maxRows={maxRows}
+            scrollable={true}
+          />
+        </div>
       </div>
+      {/* profile section */}
     </div>
   );
 }
