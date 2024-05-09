@@ -160,6 +160,7 @@ const App: React.FC = () => {
     setGithubLink("");
     setLikedProjects([]);
     setLikedByUsers([]);
+    setIndex(1);
     setProject({
       name: "",
       title: "",
@@ -211,6 +212,7 @@ const App: React.FC = () => {
     while (!validProfileFound && tries < 10) {
       console.log("210 Fetching other profile by index:", newIndex);
       // 유효한 프로필을 찾거나 시도 횟수가 10회를 넘지 않을 때까지 반복
+      if (newIndex === id) newIndex++;
       try {
         const profileData = await getProfile(newIndex);
         if (profileData && profileData.name) {

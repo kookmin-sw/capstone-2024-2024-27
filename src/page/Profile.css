@@ -46,3 +46,8 @@
   font-size: 20px;
   margin-right: 5px;
 }
+
+.profile__label,
+h3 {
+  color: black;
+}

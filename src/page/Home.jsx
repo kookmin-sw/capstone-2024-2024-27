@@ -31,11 +31,11 @@ function Home({ project, profineImage, handleLike, handleDislike }) {
       {/* <Title defalutValue={title} /> */}
       {project.title ? (
         <>
-          <h2>{project.title}</h2>
-          <h1>{project.name}</h1>
+          <h2 className="home__title">{project.title}</h2>
+          <h1 className="home__name">{project.name}</h1>
         </>
       ) : (
-        <h1>(Please edit your profile.)</h1>
+        <h1>(Something went wrong. Please refresh.)</h1>
       )}
 
       {/* <MyTextField value={title} /> */}
