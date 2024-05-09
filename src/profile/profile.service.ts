@@ -57,6 +57,7 @@ export class ProfileService {
     const likedUserIdList = await this.likesService.getLikedUserIdList(
       profile.id,
     );
+    console.log(likedUserIdList);
     likedUserIdList.forEach(async (id) => {
       const likedProfile = await this.profileRepository.findOne({
         where: {
