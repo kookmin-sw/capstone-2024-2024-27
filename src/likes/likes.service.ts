@@ -1,4 +1,10 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Inject,
+  Injectable,
+  forwardRef,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Likes } from './entities/likes.entity';
 import { Repository } from 'typeorm';
@@ -10,6 +16,7 @@ export class LikesService {
   constructor(
     @InjectRepository(Likes)
     private readonly likesRepository: Repository<Likes>,
+    @Inject(forwardRef(() => UserService))
     private readonly userService: UserService,
   ) {}
   async getLikedUserIdList(profileId: number): Promise<number[] | []> {

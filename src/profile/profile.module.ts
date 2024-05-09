@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { Module, forwardRef } from '@nestjs/common';
 import { ProfileController } from './profile.controller';
 import { ProfileService } from './profile.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
@@ -10,8 +10,13 @@ import { ConfigService } from '@nestjs/config';
 import { LikesModule } from 'src/likes/likes.module';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Profile]), UserModule, LikesModule],
+  imports: [
+    TypeOrmModule.forFeature([Profile]),
+    forwardRef(() => LikesModule),
+    forwardRef(() => UserModule),
+  ],
   controllers: [ProfileController],
   providers: [ProfileService, JwtService, ConfigService, JwtStrategy],
+  exports: [ProfileService],
 })
 export class ProfileModule {}

@@ -17,6 +17,7 @@ export class Profile {
 
   @OneToOne(() => User, (user) => user.profile)
   @JoinColumn({ name: 'userId' })
+  @Exclude({ toPlainOnly: true })
   user: User;
 
   @Column()
@@ -32,10 +33,14 @@ export class Profile {
   githubLink: string;
 
   @CreateDateColumn({ type: 'timestamptz' })
-  @Exclude()
+  @Exclude({ toPlainOnly: true })
   createdAt: Date;
 
   @UpdateDateColumn({ type: 'timestamptz' })
-  @Exclude()
+  @Exclude({ toPlainOnly: true })
   updatedAt: Date;
+
+  constructor(partial: Partial<Profile>) {
+    Object.assign(this, partial);
+  }
 }

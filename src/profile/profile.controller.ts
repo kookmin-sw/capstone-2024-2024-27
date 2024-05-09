@@ -1,7 +1,7 @@
 import {
   Body,
+  ClassSerializerInterceptor,
   Controller,
-  ForbiddenException,
   Get,
   Param,
   Post,
@@ -21,6 +21,7 @@ import { FileInterceptor } from '@nestjs/platform-express';
 @Controller('profile')
 @UseGuards(JwtAuthGuard)
 @ApiBearerAuth('access-token')
+@UseInterceptors(ClassSerializerInterceptor)
 export class ProfileController {
   constructor(private readonly profileService: ProfileService) {}
 

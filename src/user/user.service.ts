@@ -1,4 +1,11 @@
-import { HttpException, HttpStatus, Injectable, Logger } from '@nestjs/common';
+import {
+  HttpException,
+  HttpStatus,
+  Inject,
+  Injectable,
+  Logger,
+  forwardRef,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateUserDto, UserDto } from './dto/user.dto';
@@ -6,11 +13,14 @@ import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { Payload } from './dto/jwt-payload.dto';
 import { User } from './entities/user.entity';
+import { ProfileService } from 'src/profile/profile.service';
 
 @Injectable()
 export class UserService {
   private readonly logger = new Logger(UserService.name);
   constructor(
+    @Inject(forwardRef(() => ProfileService))
+    private readonly profileService: ProfileService,
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
     private readonly configService: ConfigService,
@@ -29,7 +39,14 @@ export class UserService {
     });
 
     try {
-      await this.userRepository.save(newOne);
+      const newUser = await this.userRepository.save(newOne);
+      await this.profileService.createProfile(newUser.id, {
+        name: '',
+        title: '',
+        description: '',
+        githubLink: '',
+      });
+      this.logger.log('profile created');
 
       this.logger.log(`User ${newOne.email} created`);
       return newOne;
