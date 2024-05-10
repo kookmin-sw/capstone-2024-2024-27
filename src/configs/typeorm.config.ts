@@ -18,7 +18,7 @@ export const getTypeOrmConfig = (
     synchronize: true,
     autoLoadEntities: true,
     namingStrategy: new SnakeNamingStrategy(),
-    logging: true,
+    logging: false,
     extra: {
       timezone: 'UTC',
     },

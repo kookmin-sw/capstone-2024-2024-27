@@ -46,19 +46,19 @@ export class ProfileService {
     if (!profile) {
       return null;
     }
-
+    // 내가 좋아요를 누른 사람을 찾는 로직
     const likedProjects: ProfileDto[] = [];
     const likedList = await this.userService.getLikedList(userId);
-    likedList.forEach(async (id) => {
+    for (const id of likedList) {
       const likedProfile = await this.profileRepository.findOneBy({ id });
       likedProjects.push(likedProfile);
-    });
+    }
+    // 좋아요를 누른 사람을 찾는 로직
     const likedByUsers: ProfileDto[] = [];
     const likedUserIdList = await this.likesService.getLikedUserIdList(
       profile.id,
     );
-    console.log(likedUserIdList);
-    likedUserIdList.forEach(async (id) => {
+    for (const id of likedUserIdList) {
       const likedProfile = await this.profileRepository.findOne({
         where: {
           user: {
@@ -68,7 +68,7 @@ export class ProfileService {
         relations: ['user'],
       });
       likedByUsers.push(likedProfile);
-    });
+    }
     const profileData: GetProfileDto = {
       profile,
       likedProjects,
