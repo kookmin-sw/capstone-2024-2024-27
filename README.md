@@ -1,6 +1,6 @@
 # Codate
 
-Find your Toy Projects teammates with **Codate**. You can find team members on VSCode Extension.
+Find teammates for your Toy Projects with **Codate**. You can easily find team members on VSCode Extension.
 
 ## 팀페이지 주소
 
@@ -21,20 +21,31 @@ VSCode Extension을 통하여 Side Project를 함께 진행할 사람을 간편�
 
 ## 3. 팀 소개
 
-| 이름       | 학번     | 포지션                     | 프로필 사진                                                                                                                              | 깃허브                                                       |
-| ---------- | -------- | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
-| **이승원** | 20181662 | <center>Back-end</center>  | <img src="https://github.com/kookmin-sw/capstone-2024-27/assets/89867182/5567f75a-4c3c-47b8-8fef-952a812737c4" width="100" height=auto/> | [https://github.com/KMUlee](https://github.com/KMUlee)       |
+| 이름       | 학번     | 포지션                     | 프로필 사진                                                                                                                              | 깃허브                                                           |
+| ---------- | -------- | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| **이승원** | 20181662 | <center>Back-end</center>  | <img src="https://github.com/kookmin-sw/capstone-2024-27/assets/89867182/5567f75a-4c3c-47b8-8fef-952a812737c4" width="100" height=auto/> | [https://github.com/KMUlee](https://github.com/KMUlee)           |
 | **손동석** | 20182085 | <center>Front-end</center> | <img src="https://github.com/kookmin-sw/capstone-2024-27/assets/89867182/703dfcb4-516e-4ef6-ac8c-60c888e5bd79" width="100" height=auto/> | [https://github.com/dongseokSon](https://github.com/dongseokSon) |
 
-## 4. 사용법
+## 4. How to use
 
 Test based on macOS.
+If you want to run this projext, you have to make your own server for this. There are codes for apis in backend branch.
 
 - git clone <https://github.com/kookmin-sw/capstone-2024-27>
+
+### Using VSCode Extension Debugger
+
 - npm install
 - npm run build
 - F5 to run Debug Mode
-- Command + P 이후 > React: Start React Webview
+- Command + P > React: Start React Webview
+
+### Installing with VSIX package
+
+- npm i -g vsce
+- vsce package
+  There will be a codate-0.1.0.vsix
+- Go into the Extension Marketplace on the activity bar and find "Install from VSIX"
 
 ## 5. 기술 스택
 
