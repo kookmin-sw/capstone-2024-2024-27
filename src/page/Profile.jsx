@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
 import "./Profile.css";
-import axios from "axios";
-import TextField from "@material-ui/core/TextField";
-import { saveProfile, fetchProfile } from "../utils/api";
 import MyTextField from "../components/MyTextField";
 
 const defaultImage = "sample_profile.png";
@@ -21,6 +18,7 @@ function Profile({
   likedProjects,
   likedByUsers,
   isReadOnly,
+  onImageUpload,
 }) {
   const formatProjects = (projects) =>
     projects
@@ -31,10 +29,21 @@ function Profile({
   return (
     <div className="profile">
       <div className="profile__header">
-        <img
-          className="profile__avatar"
-          src={profileImage || defaultImage}
-          alt="User Avatar"
+        <label htmlFor="profile-image-upload" className="profile__avatar-label">
+          <img
+            className="profile__avatar"
+            src={profileImage ? profileImage : defaultImage}
+            alt="User Avatar"
+          />
+        </label>
+        <input
+          id="profile-image-upload"
+          type="file"
+          accept="image/png"
+          onClick={() => console.log("file upload clicked")}
+          onChange={onImageUpload}
+          disabled={isReadOnly}
+          style={{ display: "none" }}
         />
         <div className="profile__user-info">
           <span className="profile__label">USERNAME: </span>
