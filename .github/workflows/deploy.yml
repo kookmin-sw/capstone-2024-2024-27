@@ -23,6 +23,10 @@ jobs:
           echo "CLIENT_SECRET=${{ secrets.CLIENT_SECRET }}" >> ./.env
           echo "CALLBACK_URL=${{ secrets.CALLBACK_URL }}" >> ./.env
           echo "JWT_SECRET_KEY=${{ secrets.JWT_SECRET_KEY }}" >> ./.env
+          echo "AWS_ACCESS_KEY_ID=${{ secrets.AWS_ACCESS_KEY_ID }}" >> ./.env
+          echo "AWS_SECRET_ACCESS_KEY=${{ secrets.AWS_SECRET_ACCESS_KEY }}" >> ./.env
+          echo "AWS_REGION=${{ secrets.AWS_REGION }}" >> ./.env
+          echo "AWS_BUCKET_NAME=${{ secrets.AWS_BUCKET_NAME }}" >> ./.env
 
       # 도커 메타
       - name: Docker meta
