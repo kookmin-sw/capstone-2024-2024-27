@@ -28,6 +28,17 @@ export class LikesService {
   }
 
   async likeProfile(profileId: number, userId: number): Promise<Likes> {
+    const liked = await this.likesRepository.findOne({
+      where: {
+        profileId: profileId,
+        user: {
+          id: userId,
+        },
+      },
+    });
+    if (liked) {
+      return liked;
+    }
     const user: User = await this.userService.findOneById(userId);
     const newLike: Likes = this.likesRepository.create({
       profileId,
