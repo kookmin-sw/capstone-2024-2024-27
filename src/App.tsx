@@ -6,6 +6,7 @@ import {
   getProfile,
   likeProject,
   uploadProfileImage,
+  getProfileImage,
 } from "./utils/api";
 
 import Profile from "./page/Profile";
@@ -137,6 +138,15 @@ const App: React.FC = () => {
         setDescription(response.description);
         setGithubLink(response.githubLink);
       }
+      if (profileImage) {
+        try {
+          const imageResponse = await uploadProfileImage(profileImage);
+          setProfileImage(imageResponse.imageUrl);
+          console.log("Image uploaded successfully:", imageResponse);
+        } catch (error) {
+          console.error("Error uploading image:", error);
+        }
+      }
       console.log("99 handleSave: ", response);
     }
     // setName(response.name);
@@ -162,6 +172,7 @@ const App: React.FC = () => {
     setLikedProjects([]);
     setLikedByUsers([]);
     setIndex(1);
+    setProfileImage("");
     setProject({
       name: "",
       title: "",
@@ -191,14 +202,16 @@ const App: React.FC = () => {
   const fetchProfileData = async () => {
     try {
       const profileData = await fetchProfile();
+      const profileImage = await getProfileImage();
       setId(profileData.profile.id);
       console.log("profileData.profile.id : ", profileData.profile.id);
+      console.log("200 profileImage: ", profileImage);
       setName(profileData.profile.name);
       setInitName(profileData.profile.name);
       setTitle(profileData.profile.title);
       setDescription(profileData.profile.description);
       setGithubLink(profileData.profile.githubLink);
-      setProfileImage(profileData.profile.profileImage || "");
+      setProfileImage(profileImage.src || "");
       console.log("195 current ID : ", id);
 
       setLikedByUsers(profileData.likedByUsers);
@@ -273,14 +286,8 @@ const App: React.FC = () => {
   const handleImageUpload = async (event: any) => {
     const file = event.target.files[0];
     if (!file) return;
-
-    try {
-      const response = await uploadProfileImage(file);
-      setProfileImage(response.imageUrl);
-      console.log("Image uploaded successfully:", response);
-    } catch (error) {
-      console.error("Error uploading image:", error);
-    }
+    setProfileImage(file);
+    console.log("Image temporarily saved: ", file);
   };
 
   return (

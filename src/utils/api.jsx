@@ -80,3 +80,13 @@ export const uploadProfileImage = async (file) => {
     throw error;
   }
 };
+
+export const getProfileImage = async () => {
+  try {
+    const response = await api.get("/profile/image");
+    console.log("uploadProfileImage called:", response);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

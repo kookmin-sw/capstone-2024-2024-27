@@ -32,7 +32,7 @@ function Profile({
         <label htmlFor="profile-image-upload" className="profile__avatar-label">
           <img
             className="profile__avatar"
-            src={profileImage || defaultImage}
+            src={profileImage ? profileImage : defaultImage}
             alt="User Avatar"
           />
         </label>
@@ -40,10 +40,10 @@ function Profile({
           id="profile-image-upload"
           type="file"
           accept="image/png"
-          onClick={() => console.log("clicked")}
-          // onChange={onImageUpload}
-          // disabled={isReadOnly}
-          style={{ display: "flex" }}
+          onClick={() => console.log("file upload clicked")}
+          onChange={onImageUpload}
+          disabled={isReadOnly}
+          style={{ display: "none" }}
         />
         <div className="profile__user-info">
           <span className="profile__label">USERNAME: </span>
