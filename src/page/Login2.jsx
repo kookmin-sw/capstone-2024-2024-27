@@ -37,12 +37,19 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: "#82c2ff",
     },
   },
+  errorText: {
+    color: "red",
+    textAlign: "center",
+    marginTop: "10px",
+  },
 }));
 
 export default function Login({ onLoginSuccess, onSignUpClick }) {
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const [errorText, setErrorText] = useState("");
 
   const handleLogin = async (e) => {
     console.log("Login button clicked!");
@@ -57,7 +64,8 @@ export default function Login({ onLoginSuccess, onSignUpClick }) {
       onLoginSuccess();
     } catch (error) {
       console.error("Login error:", error);
-      alert(`Error code: ${error.code}, Login failed.`);
+      // alert(`Error code: ${error.code}, Login failed.`);
+      setErrorText(`Error code: ${error.message}, Login failed.`);
     }
   };
 
@@ -115,6 +123,7 @@ export default function Login({ onLoginSuccess, onSignUpClick }) {
               </Link>
             </Grid>
           </Grid>
+          <div className={classes.errorText}>{errorText}</div>
         </form>
       </div>
     </Container>

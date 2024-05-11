@@ -1,14 +1,16 @@
 .profile {
   max-width: 1200px;
-  margin: 20px auto;
+  margin: 20px 20px auto;
   padding: 10px;
 }
 
 .profile__header {
-  margin: 0 100px 0 0;
+  /* margin: 0 100px 0 0; */
   display: flex;
   align-items: center;
-  margin-bottom: 40px;
+  max-width: 85%;
+  margin-bottom: 20px;
+  margin: 0 auto;
 }
 
 .profile__avatar {
@@ -18,7 +20,7 @@
 }
 
 .profile__user-info {
-  width: 80%;
+  width: 100%;
   margin-bottom: 5px;
   text-decoration: none;
   text-align: left;
@@ -38,7 +40,9 @@
 }
 .profile__section {
   /* margin: 20px; */
-  margin-top: 0px;
+  max-width: 85%;
+  margin: 0 auto;
+
   /* padding: 0px; */
 }
 
@@ -50,4 +54,8 @@
 .profile__label,
 h3 {
   color: black;
+}
+
+.profile__avatar-label {
+  cursor: pointer;
 }

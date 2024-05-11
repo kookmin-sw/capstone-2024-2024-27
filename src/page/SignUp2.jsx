@@ -43,17 +43,17 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp({ onSignUpSuccess, onSignInClick }) {
   const classes = useStyles();
   const [email, setEmail] = useState("");
-  const [confirmEmail, setConfirmEmail] = useState("");
+  // const [confirmEmail, setConfirmEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleSignUp = async (e) => {
     e.preventDefault();
 
-    if (email !== confirmEmail) {
-      alert("Emails do not match");
-      return;
-    }
+    // if (email !== confirmEmail) {
+    //   alert("Emails do not match");
+    //   return;
+    // }
     if (password !== confirmPassword) {
       alert("Passwords do not match");
       return;

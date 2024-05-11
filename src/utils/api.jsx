@@ -67,3 +67,16 @@ export const likeProject = async (projectId) => {
     throw error;
   }
 };
+
+export const uploadProfileImage = async (file) => {
+  const formData = new FormData();
+  formData.append("image", file);
+
+  try {
+    const response = await api.post("/profile/image", formData, {});
+    console.log("uploadProfileImage called:", response);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};

@@ -5,6 +5,7 @@ import {
   saveProfile,
   getProfile,
   likeProject,
+  uploadProfileImage,
 } from "./utils/api";
 
 import Profile from "./page/Profile";
@@ -12,7 +13,6 @@ import Home from "./page/Home";
 import Header from "./components/Header";
 import Login from "./page/Login2";
 import SignUp from "./page/SignUp2";
-import { profile } from "console";
 
 const saveProfileData = async (
   name: string,
@@ -45,12 +45,6 @@ const App: React.FC = () => {
   const [currentPage, setCurrentPage] = useState("login");
   const [isReadOnly, setIsReadOnly] = useState(true);
 
-  // const [profileData, setProfileData] = useState({
-  //   name: "",
-  //   title: "",
-  //   description: "",
-  //   githubLink: "",
-  // });
   const [id, setId] = useState(0);
   const [initName, setInitName] = useState("");
   const [name, setName] = useState("");
@@ -66,6 +60,7 @@ const App: React.FC = () => {
     title: "",
     description: "",
     githubLink: "",
+    // image: "",
   });
 
   const [index, setIndex] = useState(1);
@@ -83,6 +78,12 @@ const App: React.FC = () => {
       fetchProfileData();
     }
   }, [currentPage]);
+
+  useEffect(() => {
+    if (isLoggedin && currentPage === "home" && id !== 0) {
+      fetchOtherProfile();
+    }
+  }, [id]);
 
   const handleProfileClick = () => {
     setCurrentPage("profile");
@@ -117,7 +118,8 @@ const App: React.FC = () => {
 
   const handleSaveClick = async () => {
     console.log("done__icon clicked");
-    const op = isPost() ? "post" : "put";
+    // const op = isPost() ? "post" : "put";
+    const op = "put";
     if (isFieldsEmpty()) {
       alert("Please fill all the fields");
     } else {
@@ -144,7 +146,6 @@ const App: React.FC = () => {
     setIsLoggedin(true);
     setCurrentPage("home");
     fetchProfileData();
-    fetchOtherProfile();
     console.log("login success");
   };
 
@@ -166,7 +167,9 @@ const App: React.FC = () => {
       title: "",
       description: "",
       githubLink: "",
+      // image: "",
     });
+    setProfileImage("");
     console.log("logout success");
   };
 
@@ -189,11 +192,14 @@ const App: React.FC = () => {
     try {
       const profileData = await fetchProfile();
       setId(profileData.profile.id);
+      console.log("profileData.profile.id : ", profileData.profile.id);
       setName(profileData.profile.name);
       setInitName(profileData.profile.name);
       setTitle(profileData.profile.title);
       setDescription(profileData.profile.description);
       setGithubLink(profileData.profile.githubLink);
+      setProfileImage(profileData.profile.profileImage || "");
+      console.log("195 current ID : ", id);
 
       setLikedByUsers(profileData.likedByUsers);
       setLikedProjects(profileData.likedProjects);
@@ -214,16 +220,18 @@ const App: React.FC = () => {
       // 유효한 프로필을 찾거나 시도 횟수가 10회를 넘지 않을 때까지 반복
       if (newIndex === id) newIndex++;
       try {
-        const profileData = await getProfile(newIndex);
-        if (profileData && profileData.name) {
+        const projectData = await getProfile(newIndex);
+        // const projectImage = await getImage(newIndex);
+        if (projectData && projectData.name) {
           setProject({
-            name: profileData.name,
-            githubLink: profileData.githubLink,
-            title: profileData.title,
-            description: profileData.description,
+            name: projectData.name,
+            githubLink: projectData.githubLink,
+            title: projectData.title,
+            description: projectData.description,
+            // image: projectImage,
           });
           validProfileFound = true;
-          console.log("223 Valid profile fetched:", profileData);
+          console.log("223 Valid profile fetched:", projectData);
         } else {
           newIndex++; // 유효하지 않은 프로필일 경우, 인덱스 증가
           console.log("226 Empty profile found, skipping to next...");
@@ -242,6 +250,7 @@ const App: React.FC = () => {
         githubLink: "",
         title: "",
         description: "",
+        // image: "",
       });
     }
 
@@ -249,14 +258,29 @@ const App: React.FC = () => {
   };
 
   const handleLikeButton = async () => {
-    console.log("handleLikeButton Clicked: ", index);
+    console.log("handleLikeButton index: ", index - 1);
 
-    likeProject(index);
+    const response = await likeProject(index - 1);
+    console.log("handleLikeButton Clicked: ", response);
     fetchOtherProfile();
   };
+
   const handleDislikeButton = async () => {
     console.log("handleDislikeButton: ", index);
     fetchOtherProfile();
+  };
+
+  const handleImageUpload = async (event: any) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    try {
+      const response = await uploadProfileImage(file);
+      setProfileImage(response.imageUrl);
+      console.log("Image uploaded successfully:", response);
+    } catch (error) {
+      console.error("Error uploading image:", error);
+    }
   };
 
   return (
@@ -294,6 +318,7 @@ const App: React.FC = () => {
             likedProjects={likedProjects}
             likedByUsers={likedByUsers}
             isReadOnly={isReadOnly}
+            onImageUpload={handleImageUpload}
           />
         ) : currentPage === "login" ? (
           <Login onLoginSuccess={handleLogin} onSignUpClick={handleSignUp} />

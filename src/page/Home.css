@@ -10,12 +10,13 @@
 .home__title {
   font-size: 42px;
   margin-bottom: 10px;
+  margin-top: 0;
 }
 
 .home__name {
   font-size: 32px;
   margin-top: 0;
-  margin-bottom: 20px;
+  margin-bottom: 0px;
 }
 
 .home__description {
