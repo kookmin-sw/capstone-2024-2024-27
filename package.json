@@ -5,14 +5,20 @@
     "vscode": "^1.23.0"
   },
   "publisher": "seungwon",
+  "license": "MIT",
   "activationEvents": [
     "onCommand:react-webview.start"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/kookmin-sw/capstone-2024-27"
+    "url": "https://github.com/kookmin-sw/capstone-2024-27.git"
   },
   "icon": "public/codate-color.png",
+  "displayName": "Codate",
+  "description": "Make your team project easier with Codate",
+  "categories": [
+    "Other"
+  ],
   "main": "./build/ext-src/extension.js",
   "contributes": {
     "viewsContainers": {
