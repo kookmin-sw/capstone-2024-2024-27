@@ -29,7 +29,7 @@ VSCode Extension을 통하여 Side Project를 함께 진행할 사람을 간편�
 ## 4. How to use
 
 Test based on macOS.
-If you want to run this projext, you have to make your own server for this. There are codes for apis in backend branch.
+If you want to run this projext, you have to make your own server for this. There are codes for apis in backend branch you can use.
 
 - git clone <https://github.com/kookmin-sw/capstone-2024-27>
 
@@ -43,8 +43,7 @@ If you want to run this projext, you have to make your own server for this. Ther
 ### Installing with VSIX package
 
 - npm i -g vsce
-- vsce package
-  There will be a codate-0.1.0.vsix
+- vsce package // (There will be a codate-0.1.0.vsix)
 - Go into the Extension Marketplace on the activity bar and find "Install from VSIX"
 
 ## 5. 기술 스택
