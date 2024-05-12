@@ -8,6 +8,10 @@
   "activationEvents": [
     "onCommand:react-webview.start"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kookmin-sw/capstone-2024-27"
+  },
   "main": "./build/ext-src/extension.js",
   "contributes": {
     "viewsContainers": {
