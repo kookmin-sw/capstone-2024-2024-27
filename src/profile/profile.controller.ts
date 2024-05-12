@@ -25,11 +25,6 @@ import { FileInterceptor } from '@nestjs/platform-express';
 export class ProfileController {
   constructor(private readonly profileService: ProfileService) {}
 
-  @Get('/image')
-  async getProfileImage(@GetUser() user: Payload): Promise<{ src: string }> {
-    return { src: await this.profileService.getImage(user.userId) };
-  }
-
   @Get('/:profileId')
   @ApiParam({
     name: 'profileId',
@@ -61,23 +56,6 @@ export class ProfileController {
   })
   async getProfile(@GetUser() user: Payload): Promise<GetProfileDto | null> {
     return await this.profileService.getProfile(user.userId);
-  }
-
-  @Post('/')
-  @ApiBody({
-    description: 'Create a profile',
-    type: ProfileDto,
-  })
-  @ApiResponse({
-    status: 201,
-    description: 'Create a profile',
-    type: ProfileDto,
-  })
-  async createProfile(
-    @GetUser() user: Payload,
-    @Body() newProfile: ProfileDto,
-  ): Promise<ProfileDto> {
-    return await this.profileService.createProfile(user.userId, newProfile);
   }
 
   @Put('/')

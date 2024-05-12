@@ -32,6 +32,9 @@ export class Profile {
   @Column()
   githubLink: string;
 
+  @Column()
+  image: string;
+
   @CreateDateColumn({ type: 'timestamptz' })
   @Exclude({ toPlainOnly: true })
   createdAt: Date;

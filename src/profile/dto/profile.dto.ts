@@ -30,6 +30,12 @@ export class ProfileDto {
     example: 'https://github.com/KMUlee',
   })
   readonly githubLink: string;
+
+  @IsString()
+  @ApiProperty({
+    example: 'https://s3.ap-northeast-2.amazonaws.com/...',
+  })
+  readonly image: string;
 }
 
 export class GetProfileDto {

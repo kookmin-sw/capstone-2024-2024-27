@@ -179,8 +179,7 @@ export class ProfileService {
   ): Promise<AWS.S3.ManagedUpload.SendData> {
     await this.checkAndCreateUserFolder(userId);
     const fileKey = `${userId}/profile.png`;
-
-    return this.s3
+    const upload = await this.s3
       .upload({
         Bucket: this.bucketName,
         Key: fileKey,
@@ -188,9 +187,28 @@ export class ProfileService {
         ACL: 'public-read',
       })
       .promise();
+    const profile = await this.profileRepository.findOne({
+      where: {
+        user: {
+          id: userId,
+        },
+      },
+      relations: ['user'],
+    });
+    try {
+      await this.profileRepository.save({
+        ...profile,
+        image: upload.Location,
+      });
+    } catch (error) {
+      console.error(`Error saving image URL: ${error}`);
+      throw new Error('Unable to save image URL.');
+    }
+
+    return upload;
   }
 
-  async getImage(userId: number) {
+  async getImage(userId: number): Promise<string> {
     const exists = await this.fileExists(userId);
 
     if (!exists) {

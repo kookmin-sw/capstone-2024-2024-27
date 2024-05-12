@@ -45,6 +45,7 @@ export class UserService {
         title: '',
         description: '',
         githubLink: '',
+        image: '',
       });
       this.logger.log('profile created');
 
