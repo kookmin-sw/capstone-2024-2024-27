@@ -47,12 +47,11 @@ If you want to run this projext, you have to make your own server for this. Ther
 - npm install
 - npm run build
 - F5 to run Debug Mode
-- Command + P > React: Start React Webview
+- Command ⌘ + P > React: Start React Webview
 
 ### Option 2. Installing with VSIX package
 
-- npm i -g vsce
-- vsce package
+- npm run make-package
 
   codate-0.1.0.vsix will be generated on the root
 
@@ -79,7 +78,7 @@ If you want to run this projext, you have to make your own server for this. Ther
 
 ## 6. 기타
 
-This project was bootstrapped with
+This project was based on
 
 - [vscode-webview-react](https://github.com/rebornix/vscode-webview-react)
 

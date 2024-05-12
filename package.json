@@ -4,7 +4,7 @@
   "engines": {
     "vscode": "^1.23.0"
   },
-  "publisher": "seungwon",
+  "publisher": "SeungWon, DongSeok",
   "license": "MIT",
   "activationEvents": [
     "onCommand:react-webview.start"
@@ -24,7 +24,7 @@
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "Codate",
+          "id": "codate",
           "title": "Codate",
           "icon": "public/codate-mono.svg"
         }
@@ -48,7 +48,7 @@
     "viewsWelcome": [
       {
         "view": "codate.views",
-        "contents": "[Get Started](command:react-webview.start)"
+        "contents": "You can start finding your teammates with Codate. \n\nIf you need more information, please visit my github. \n[Get Started](command:react-webview.start)"
       }
     ]
   },
@@ -74,7 +74,8 @@
     "start": "react-scripts start",
     "build": "node ./scripts/build-non-split.js && tsc -p tsconfig.extension.json",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "make-package": "npm i -g vsce && vsce package --no-yarn"
   },
   "devDependencies": {
     "@types/jest": "^23.3.13",
