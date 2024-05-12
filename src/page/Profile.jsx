@@ -26,22 +26,37 @@ function Profile({
       .map((p) => `${p.name}: ${p.title}, ${p.githubLink}`)
       .join("\n");
 
+  const handleImageChange = (event) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      onImageUpload(file);
+    }
+  };
+
   return (
     <div className="profile">
       <div className="profile__header">
-        <label htmlFor="profile-image-upload" className="profile__avatar-label">
+        <label
+          htmlFor="profile-image-upload"
+          className="profile__avatar-label"
+          style={{ cursor: "pointer" }}
+        >
           <img
             className="profile__avatar"
-            src={profileImage ? profileImage : defaultImage}
+            src={
+              profileImage instanceof File
+                ? URL.createObjectURL(profileImage)
+                : profileImage || defaultImage
+            }
             alt="User Avatar"
           />
         </label>
         <input
           id="profile-image-upload"
           type="file"
-          accept="image/png"
+          accept="image/png, image/jpeg, image/jpg"
           onClick={() => console.log("file upload clicked")}
-          onChange={onImageUpload}
+          onChange={handleImageChange}
           disabled={isReadOnly}
           style={{ display: "none" }}
         />

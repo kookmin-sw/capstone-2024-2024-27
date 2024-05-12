@@ -12,6 +12,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import Alert from "@material-ui/lab/Alert";
 import { api } from "../utils/api";
 
 const useStyles = makeStyles((theme) => ({
@@ -27,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "#3376cd",
   },
   form: {
-    width: "100%", // Fix IE 11 issue.
+    width: "100%",
     marginTop: theme.spacing(3),
   },
   submit: {
@@ -47,6 +48,8 @@ export default function SignUp({ onSignUpSuccess, onSignInClick }) {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  const [errorText, setErrorText] = useState("");
+
   const handleSignUp = async (e) => {
     e.preventDefault();
 
@@ -55,7 +58,8 @@ export default function SignUp({ onSignUpSuccess, onSignInClick }) {
     //   return;
     // }
     if (password !== confirmPassword) {
-      alert("Passwords do not match");
+      setErrorText(`Passwords do not match`);
+      // alert("Passwords do not match");
       return;
     }
 
@@ -66,12 +70,16 @@ export default function SignUp({ onSignUpSuccess, onSignInClick }) {
       });
 
       if (response.status === 201) {
-        alert("User successfully created! Please log in.");
+        setErrorText(`User successfully created! Please log in.`);
+        // alert("User successfully created! Please log in.");
         onSignUpSuccess();
       }
     } catch (error) {
       console.error("Sign up error:", error);
-      alert(`Error code: "${error.response.data.message}", Sign up failed.`);
+      setErrorText(
+        `Error code: ${error.response.data.message}, Sign up failed.`
+      );
+      // alert(`Error code: "${error.response.data.message}", Sign up failed.`);
     }
   };
 
@@ -159,6 +167,17 @@ export default function SignUp({ onSignUpSuccess, onSignInClick }) {
               </Link>
             </Grid>
           </Grid>
+          <div className="error__alert" style={{ marginTop: "20px" }}>
+            {errorText && (
+              <Alert
+                variant="outlined"
+                severity="error"
+                onClose={() => setErrorText("")}
+              >
+                {errorText}
+              </Alert>
+            )}
+          </div>
         </form>
       </div>
     </Container>

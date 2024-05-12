@@ -12,6 +12,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import Alert from "@material-ui/lab/Alert";
 import { api } from "../utils/api";
 
 const useStyles = makeStyles((theme) => ({
@@ -65,7 +66,7 @@ export default function Login({ onLoginSuccess, onSignUpClick }) {
     } catch (error) {
       console.error("Login error:", error);
       // alert(`Error code: ${error.code}, Login failed.`);
-      setErrorText(`Error code: ${error.message}, Login failed.`);
+      setErrorText(`Error code: ${error.response.data.message}, Login failed.`);
     }
   };
 
@@ -123,7 +124,17 @@ export default function Login({ onLoginSuccess, onSignUpClick }) {
               </Link>
             </Grid>
           </Grid>
-          <div className={classes.errorText}>{errorText}</div>
+          <div className="error__alert" style={{ marginTop: "20px" }}>
+            {errorText && (
+              <Alert
+                variant="outlined"
+                severity="error"
+                onClose={() => setErrorText("")}
+              >
+                {errorText}
+              </Alert>
+            )}
+          </div>
         </form>
       </div>
     </Container>
