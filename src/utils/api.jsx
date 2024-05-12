@@ -84,7 +84,7 @@ export const uploadProfileImage = async (file) => {
 export const getProfileImage = async () => {
   try {
     const response = await api.get("/profile/image");
-    console.log("uploadProfileImage called:", response);
+    console.log("getProfileImage called:", response);
     return response.data;
   } catch (error) {
     throw error;

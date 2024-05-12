@@ -52,7 +52,7 @@ const App: React.FC = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [githubLink, setGithubLink] = useState("");
-  const [profileImage, setProfileImage] = useState("");
+  const [profileImage, setProfileImage] = useState<File | string>("");
   const [likedProjects, setLikedProjects] = useState([]);
   const [likedByUsers, setLikedByUsers] = useState([]);
 
@@ -138,10 +138,12 @@ const App: React.FC = () => {
         setDescription(response.description);
         setGithubLink(response.githubLink);
       }
-      if (profileImage) {
+      if (typeof profileImage === "object") {
         try {
           const imageResponse = await uploadProfileImage(profileImage);
-          setProfileImage(imageResponse.imageUrl);
+          setProfileImage(
+            `${imageResponse.imageUrl}?timestamp=${new Date().getTime()}`
+          );
           console.log("Image uploaded successfully:", imageResponse);
         } catch (error) {
           console.error("Error uploading image:", error);
@@ -283,9 +285,7 @@ const App: React.FC = () => {
     fetchOtherProfile();
   };
 
-  const handleImageUpload = async (event: any) => {
-    const file = event.target.files[0];
-    if (!file) return;
+  const handleImageUpload = (file: File) => {
     setProfileImage(file);
     console.log("Image temporarily saved: ", file);
   };
