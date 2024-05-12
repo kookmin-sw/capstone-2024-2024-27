@@ -47,7 +47,7 @@ class ReactPanel {
     // Create and show a new webview panel
     this._panel = vscode.window.createWebviewPanel(
       ReactPanel.viewType,
-      "React",
+      "Codate",
       column,
       {
         // Enable javascript in the webview

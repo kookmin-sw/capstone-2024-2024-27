@@ -12,8 +12,8 @@ import {
 import Profile from "./page/Profile";
 import Home from "./page/Home";
 import Header from "./components/Header";
-import Login from "./page/Login2";
-import SignUp from "./page/SignUp2";
+import Login from "./page/Login";
+import SignUp from "./page/SignUp";
 
 const saveProfileData = async (
   name: string,

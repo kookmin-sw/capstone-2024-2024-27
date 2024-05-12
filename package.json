@@ -4,7 +4,7 @@
   "engines": {
     "vscode": "^1.23.0"
   },
-  "publisher": "seugnwon",
+  "publisher": "seungwon",
   "activationEvents": [
     "onCommand:react-webview.start"
   ],
@@ -12,14 +12,15 @@
     "type": "git",
     "url": "https://github.com/kookmin-sw/capstone-2024-27"
   },
+  "icon": "public/codate-color.png",
   "main": "./build/ext-src/extension.js",
   "contributes": {
     "viewsContainers": {
       "activitybar": [
         {
-          "id": "codate",
-          "title": "codate",
-          "icon": "resources/codate-mono.svg"
+          "id": "Codate",
+          "title": "Codate",
+          "icon": "public/codate-mono.svg"
         }
       ]
     },
@@ -35,7 +36,7 @@
       {
         "command": "react-webview.start",
         "title": "Start React Webview",
-        "category": "React"
+        "category": "Codate"
       }
     ],
     "viewsWelcome": [
