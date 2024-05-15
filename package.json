@@ -1,25 +1,27 @@
 {
   "name": "codate",
-  "version": "0.1.0",
-  "engines": {
-    "vscode": "^1.23.0"
-  },
+  "displayName": "Codate",
+  "version": "0.1.1",
+  "description": "Make your team project easier with Codate",
   "publisher": "DongSeokSon",
+  "author": {
+    "name": "DongSeok Son",
+    "email": "dongseok.155@gmail.com"
+  },
   "readme": "README.md",
+  "changelog": "CHANGELOG.md",
   "license": "MIT",
-  "activationEvents": [
-    "onCommand:react-webview.start"
-  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/kookmin-sw/capstone-2024-27.git"
   },
   "icon": "public/codate-color.png",
-  "displayName": "Codate",
-  "description": "Make your team project easier with Codate",
-  "categories": [
-    "Other"
+  "activationEvents": [
+    "onCommand:react-webview.start"
   ],
+  "engines": {
+    "vscode": "^1.23.0"
+  },
   "main": "./build/ext-src/extension.js",
   "contributes": {
     "viewsContainers": {
@@ -35,7 +37,8 @@
       "codate": [
         {
           "id": "codate.views",
-          "name": "Get Started"
+          "name": "Get Started",
+          "icon": "public/codate-color.svg"
         }
       ]
     },

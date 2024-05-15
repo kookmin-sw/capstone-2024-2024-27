@@ -24,7 +24,7 @@ function Header({
   return (
     <div className="header">
       <h1 className="header__text">
-        <img src="codate_color.svg" alt="Logo" className="logo"></img>
+        <img src="codate-color.svg" alt="Logo" className="logo"></img>
         Codate
       </h1>
       {isLoggedin && (
