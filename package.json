@@ -4,7 +4,8 @@
   "engines": {
     "vscode": "^1.23.0"
   },
-  "publisher": "SeungWon, DongSeok",
+  "publisher": "DongSeokSon",
+  "readme": "README.md",
   "license": "MIT",
   "activationEvents": [
     "onCommand:react-webview.start"
