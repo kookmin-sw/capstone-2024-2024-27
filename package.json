@@ -48,7 +48,7 @@
     "viewsWelcome": [
       {
         "view": "codate.views",
-        "contents": "You can start finding your teammates with Codate. \n\nIf you need more information, please visit my github. \n[Get Started](command:react-webview.start)"
+        "contents": "# Welcome to Codate!!  \n\nYou can start finding your teammates with Codate. \n\nIf you need more information, please visit my [github](https://github.com/kookmin-sw/capstone-2024-27). \n[Get Started](command:react-webview.start)"
       }
     ]
   },

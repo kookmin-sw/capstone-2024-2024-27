@@ -9,6 +9,7 @@
   /* margin: 0 100px 0 0; */
   display: flex;
   align-items: center;
+  justify-content: space-between;
   max-width: 85%;
   margin-bottom: 20px;
   margin: 0 auto;
@@ -17,7 +18,7 @@
 .profile__avatar {
   width: 120px;
   height: 100%;
-  margin-right: 4vw;
+  margin-right: 40px;
 }
 
 .profile__user-info {
