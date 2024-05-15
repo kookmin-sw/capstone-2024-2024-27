@@ -14,12 +14,14 @@ import Home from "./page/Home";
 import Header from "./components/Header";
 import Login from "./page/Login";
 import SignUp from "./page/SignUp";
+import PopupAlert from "./components/PopupAlert";
 
 const saveProfileData = async (
   name: string,
   title: string,
   description: string,
   githubLink: string,
+  image: string,
   op: string
 ) => {
   try {
@@ -30,6 +32,7 @@ const saveProfileData = async (
         title: title,
         description: description,
         githubLink: githubLink,
+        image: image,
       },
       op
     );
@@ -52,7 +55,9 @@ const App: React.FC = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [githubLink, setGithubLink] = useState("");
+  const [image, setImage] = useState("");
   const [profileImage, setProfileImage] = useState<File | string>("");
+
   const [likedProjects, setLikedProjects] = useState([]);
   const [likedByUsers, setLikedByUsers] = useState([]);
 
@@ -61,10 +66,14 @@ const App: React.FC = () => {
     title: "",
     description: "",
     githubLink: "",
-    // image: "",
+    image: "",
   });
 
   const [index, setIndex] = useState(1);
+
+  const [alertOpen, setAlertOpen] = useState(false);
+  const [alertMessage, setAlertMessage] = useState("");
+  const [signUpSuccess, setSignUpSuccess] = useState(false);
 
   useEffect(() => {
     const accessToken = localStorage.getItem("accessToken");
@@ -122,7 +131,8 @@ const App: React.FC = () => {
     // const op = isPost() ? "post" : "put";
     const op = "put";
     if (isFieldsEmpty()) {
-      alert("Please fill all the fields");
+      setAlertMessage("Please fill all the fields");
+      setAlertOpen(true);
     } else {
       setIsReadOnly(true);
       const response = await saveProfileData(
@@ -130,6 +140,7 @@ const App: React.FC = () => {
         title,
         description,
         githubLink,
+        image,
         op
       );
       if (response) {
@@ -137,6 +148,7 @@ const App: React.FC = () => {
         setTitle(response.title);
         setDescription(response.description);
         setGithubLink(response.githubLink);
+        setImage(response.image);
       }
       if (typeof profileImage === "object") {
         try {
@@ -155,6 +167,7 @@ const App: React.FC = () => {
   };
 
   const handleLogin = () => {
+    setSignUpSuccess(false);
     setIsLoggedin(true);
     setCurrentPage("home");
     fetchProfileData();
@@ -175,12 +188,13 @@ const App: React.FC = () => {
     setLikedByUsers([]);
     setIndex(1);
     setProfileImage("");
+    setImage("");
     setProject({
       name: "",
       title: "",
       description: "",
       githubLink: "",
-      // image: "",
+      image: "",
     });
     setProfileImage("");
     console.log("logout success");
@@ -193,6 +207,7 @@ const App: React.FC = () => {
 
   const handleSignUpSuccess = () => {
     setCurrentPage("login");
+    setSignUpSuccess(true);
     console.log("signup success");
   };
 
@@ -204,7 +219,6 @@ const App: React.FC = () => {
   const fetchProfileData = async () => {
     try {
       const profileData = await fetchProfile();
-      const profileImage = await getProfileImage();
       setId(profileData.profile.id);
       console.log("profileData.profile.id : ", profileData.profile.id);
       console.log("200 profileImage: ", profileImage);
@@ -213,7 +227,7 @@ const App: React.FC = () => {
       setTitle(profileData.profile.title);
       setDescription(profileData.profile.description);
       setGithubLink(profileData.profile.githubLink);
-      setProfileImage(profileImage.src || "");
+      setImage(profileData.profile.image);
       console.log("195 current ID : ", id);
 
       setLikedByUsers(profileData.likedByUsers);
@@ -243,7 +257,7 @@ const App: React.FC = () => {
             githubLink: projectData.githubLink,
             title: projectData.title,
             description: projectData.description,
-            // image: projectImage,
+            image: projectData.image,
           });
           validProfileFound = true;
           console.log("223 Valid profile fetched:", projectData);
@@ -265,7 +279,7 @@ const App: React.FC = () => {
         githubLink: "",
         title: "",
         description: "",
-        // image: "",
+        image: "",
       });
     }
 
@@ -285,9 +299,13 @@ const App: React.FC = () => {
     fetchOtherProfile();
   };
 
-  const handleImageUpload = (file: File) => {
+  const onImageChange = (file: File) => {
     setProfileImage(file);
     console.log("Image temporarily saved: ", file);
+  };
+
+  const handleCloseAlert = () => {
+    setAlertOpen(false);
   };
 
   return (
@@ -307,7 +325,6 @@ const App: React.FC = () => {
         {currentPage === "home" && isLoggedin ? (
           <Home
             project={project}
-            profineImage={profileImage}
             handleLike={handleLikeButton}
             handleDislike={handleDislikeButton}
           />
@@ -322,13 +339,21 @@ const App: React.FC = () => {
             githubLink={githubLink}
             setGithubLink={setGithubLink}
             profileImage={profileImage}
+            image={image}
             likedProjects={likedProjects}
             likedByUsers={likedByUsers}
             isReadOnly={isReadOnly}
-            onImageUpload={handleImageUpload}
+            onImageChange={onImageChange}
+            alertOpen={alertOpen}
+            alertMessage={alertMessage}
+            handleCloseAlert={handleCloseAlert}
           />
         ) : currentPage === "login" ? (
-          <Login onLoginSuccess={handleLogin} onSignUpClick={handleSignUp} />
+          <Login
+            onLoginSuccess={handleLogin}
+            onSignUpClick={handleSignUp}
+            signUpSuccess={signUpSuccess}
+          />
         ) : (
           <SignUp
             onSignUpSuccess={handleSignUpSuccess}

@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./Profile.css";
 import MyTextField from "../components/MyTextField";
+import MyListBox from "../components/MyListBox";
+import PopupAlert from "../components/PopupAlert";
 
-const defaultImage = "sample_profile.png";
+const defaultImage = "non-editable-profile.png";
+const editableDefalultImage = "editable_profile.png";
 const maxRows = 6;
 
 function Profile({
@@ -15,21 +18,38 @@ function Profile({
   githubLink,
   setGithubLink,
   profileImage,
+  image,
   likedProjects,
   likedByUsers,
   isReadOnly,
-  onImageUpload,
+  onImageChange,
+  alertOpen,
+  alertMessage,
+  handleCloseAlert,
 }) {
   const formatProjects = (projects) =>
     projects
       .filter((p) => p)
-      .map((p) => `${p.name}: ${p.title}, ${p.githubLink}`)
-      .join("\n");
+      .map((p) => ({
+        primary: `${p.name}: `,
+        secondary: `TITLE: ${p.title} GITHUB: ${p.githubLink}`,
+      }));
 
   const handleImageChange = (event) => {
     const file = event.target.files?.[0];
     if (file) {
-      onImageUpload(file);
+      onImageChange(file);
+    }
+  };
+
+  const getProfileImageSrc = () => {
+    if (profileImage instanceof File) {
+      return URL.createObjectURL(profileImage);
+    } else if (image !== "") {
+      return image;
+    } else {
+      if (isReadOnly) return defaultImage;
+      else return editableDefalultImage;
     }
   };
 
@@ -39,15 +59,11 @@ function Profile({
         <label
           htmlFor="profile-image-upload"
           className="profile__avatar-label"
-          style={{ cursor: "pointer" }}
+          style={{ cursor: isReadOnly ? "default" : "pointer" }}
         >
           <img
             className="profile__avatar"
-            src={
-              profileImage instanceof File
-                ? URL.createObjectURL(profileImage)
-                : profileImage || defaultImage
-            }
+            src={getProfileImageSrc()}
             alt="User Avatar"
           />
         </label>
@@ -93,7 +109,7 @@ function Profile({
             isReadOnly={isReadOnly}
           />
         </div>
-        <h3>Project you want to do</h3>
+        <h3>Project Description</h3>
         <div className="profile__contents">
           <MyTextField
             value={description}
@@ -103,20 +119,28 @@ function Profile({
             scrollable={true}
           />
           <h3>Projects you like</h3>
-          <MyTextField
+          {/* <MyTextField
             value={formatProjects(likedProjects)}
             maxRows={maxRows}
             scrollable={true}
-          />
+          /> */}
+          <MyListBox items={formatProjects(likedProjects)} />
           <h3>People who like your project.</h3>
-          <MyTextField
+          {/* <MyTextField
             value={formatProjects(likedByUsers)}
             maxRows={maxRows}
             scrollable={true}
-          />
+          /> */}
+          <MyListBox items={formatProjects(likedByUsers)} />
         </div>
       </div>
       {/* profile section */}
+
+      <PopupAlert
+        alertOpen={alertOpen}
+        title={alertMessage}
+        handleClose={handleCloseAlert}
+      />
     </div>
   );
 }

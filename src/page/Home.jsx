@@ -4,28 +4,12 @@ import "./Home.css";
 import TinderCards from "../components/TinderCards";
 import SwipeButtons from "../components/SwipeButtons";
 import MyTextField from "../components/MyTextField";
+import PopupAlert from "../components/PopupAlert";
+import ImageBox from "../components/ImageBox";
 
-function Home({ project, profineImage, handleLike, handleDislike }) {
-  const [people, setPeople] = useState([
-    {
-      name: "steve jobs",
-      url: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Steve_Jobs_Headshot_2010-CROP_%28cropped_2%29.jpg/1280px-Steve_Jobs_Headshot_2010-CROP_%28cropped_2%29.jpg",
-    },
-    {
-      name: "mark zuckerberg",
-      url: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/18/Mark_Zuckerberg_F8_2019_Keynote_%2832830578717%29_%28cropped%29.jpg/1280px-Mark_Zuckerberg_F8_2019_Keynote_%2832830578717%29_%28cropped%29.jpg",
-    },
-    {
-      name: "ahri",
-      url: require("../assets/IMG_0870.jpeg"),
-    },
-  ]);
+const empty_image = "empty_image.png";
 
-  const [currentIndex, setCurrentIndex] = useState(0);
-  // const handleButtonClick = () => {
-  //   setCurrentIndex((prevIndex) => (prevIndex + 1) % people.length);
-  // };
-
+function Home({ project, handleLike, handleDislike }) {
   return (
     <div className="home">
       {/* <Title defalutValue={title} /> */}
@@ -35,11 +19,11 @@ function Home({ project, profineImage, handleLike, handleDislike }) {
           <h1 className="home__name">{project.name}</h1>
         </>
       ) : (
-        <h1>(Something went wrong. Please refresh.)</h1>
+        <h1>There is no more profile.</h1>
       )}
-
+      <TinderCards image={project.image ? project.image : empty_image} />
       {/* <MyTextField value={title} /> */}
-      <TinderCards people={people[currentIndex]} />
+      {/* <TinderCards people={people[currentIndex]} /> */}
       <div className="home__description">
         <MyTextField
           value={project.description}
