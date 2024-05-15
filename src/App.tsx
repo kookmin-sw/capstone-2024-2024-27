@@ -143,13 +143,13 @@ const App: React.FC = () => {
         image,
         op
       );
-      if (response) {
-        setName(response.name);
-        setTitle(response.title);
-        setDescription(response.description);
-        setGithubLink(response.githubLink);
-        setImage(response.image);
-      }
+      // if (response) {
+      //   setName(response.name);
+      //   setTitle(response.title);
+      //   setDescription(response.description);
+      //   setGithubLink(response.githubLink);
+      //   setImage(response.image);
+      // }
       if (typeof profileImage === "object") {
         try {
           const imageResponse = await uploadProfileImage(profileImage);
