@@ -45,7 +45,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Login({ onLoginSuccess, onSignUpClick }) {
+export default function Login({
+  onLoginSuccess,
+  onSignUpClick,
+  signUpSuccess,
+}) {
   const classes = useStyles();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -125,6 +129,15 @@ export default function Login({ onLoginSuccess, onSignUpClick }) {
             </Grid>
           </Grid>
           <div className="error__alert" style={{ marginTop: "20px" }}>
+            {signUpSuccess && (
+              <Alert
+                variant="outlined"
+                severity="success"
+                onClose={() => setSignUpSuccess(false)}
+              >
+                Sign up success!
+              </Alert>
+            )}
             {errorText && (
               <Alert
                 variant="outlined"
