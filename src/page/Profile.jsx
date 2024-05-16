@@ -70,7 +70,7 @@ function Profile({
         <input
           id="profile-image-upload"
           type="file"
-          accept="image/png, image/jpeg, image/jpg"
+          accept="image/png"
           onClick={() => console.log("file upload clicked")}
           onChange={handleImageChange}
           disabled={isReadOnly}

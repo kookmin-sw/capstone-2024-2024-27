@@ -14,7 +14,8 @@ import Home from "./page/Home";
 import Header from "./components/Header";
 import Login from "./page/Login";
 import SignUp from "./page/SignUp";
-import PopupAlert from "./components/PopupAlert";
+
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const saveProfileData = async (
   name: string,
@@ -47,6 +48,8 @@ const saveProfileData = async (
 const App: React.FC = () => {
   const [isLoggedin, setIsLoggedin] = useState(false);
   const [currentPage, setCurrentPage] = useState("login");
+  const [loading, setLoading] = useState(false);
+
   const [isReadOnly, setIsReadOnly] = useState(true);
 
   const [id, setId] = useState(0);
@@ -128,13 +131,32 @@ const App: React.FC = () => {
 
   const handleSaveClick = async () => {
     console.log("done__icon clicked");
-    // const op = isPost() ? "post" : "put";
-    const op = "put";
+
     if (isFieldsEmpty()) {
       setAlertMessage("Please fill all the fields");
       setAlertOpen(true);
-    } else {
-      setIsReadOnly(true);
+      return;
+    }
+
+    setLoading(true);
+
+    if (typeof profileImage === "object") {
+      try {
+        const imageResponse = await uploadProfileImage(profileImage);
+        setProfileImage(
+          `${imageResponse.imageUrl}?timestamp=${new Date().getTime()}`
+        );
+        console.log("Image uploaded successfully:", imageResponse);
+      } catch (error) {
+        console.error("Error uploading image:", error);
+        setLoading(false);
+        return;
+      }
+    }
+
+    try {
+      const op = "put";
+
       const response = await saveProfileData(
         name,
         title,
@@ -143,25 +165,19 @@ const App: React.FC = () => {
         image,
         op
       );
-      // if (response) {
-      //   setName(response.name);
-      //   setTitle(response.title);
-      //   setDescription(response.description);
-      //   setGithubLink(response.githubLink);
-      //   setImage(response.image);
-      // }
-      if (typeof profileImage === "object") {
-        try {
-          const imageResponse = await uploadProfileImage(profileImage);
-          setProfileImage(
-            `${imageResponse.imageUrl}?timestamp=${new Date().getTime()}`
-          );
-          console.log("Image uploaded successfully:", imageResponse);
-        } catch (error) {
-          console.error("Error uploading image:", error);
-        }
+      if (response) {
+        setIsReadOnly(true);
+        setName(response.name);
+        setTitle(response.title);
+        setDescription(response.description);
+        setGithubLink(response.githubLink);
+        setImage(response.image);
+        console.log("169 handleSave: ", response);
       }
-      console.log("99 handleSave: ", response);
+    } catch (error) {
+      console.error("Error saving profile:", error);
+    } finally {
+      setLoading(false);
     }
     // setName(response.name);
   };
@@ -359,6 +375,11 @@ const App: React.FC = () => {
             onSignUpSuccess={handleSignUpSuccess}
             onSignInClick={handleSignInClick}
           />
+        )}
+        {loading && (
+          <div className="loading">
+            <CircularProgress />
+          </div>
         )}
       </div>
     </div>
