@@ -51,7 +51,6 @@ If you want to run this projext, you have to make your own server for this. Ther
 
 ### Option 2. Installing with VSIX package
 
-- npm run esbuild
 - npm run make-package
 
   codate-0.1.1.vsix will be generated on the root

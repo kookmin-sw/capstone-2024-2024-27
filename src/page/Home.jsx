@@ -5,7 +5,6 @@ import TinderCards from "../components/TinderCards";
 import SwipeButtons from "../components/SwipeButtons";
 import MyTextField from "../components/MyTextField";
 import PopupAlert from "../components/PopupAlert";
-import ImageBox from "../components/ImageBox";
 
 const empty_image = "empty_image.png";
 

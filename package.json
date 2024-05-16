@@ -79,9 +79,6 @@
     "build": "node ./scripts/build-non-split.js && tsc -p tsconfig.extension.json",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "esbuild-base": "esbuild ./ext-src/extension.ts --bundle --outfile=dist/extension.js --external:vscode --format=cjs --platform=node",
-    "esbuild": "npm run esbuild-base -- --sourcemap",
-    "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
     "make-package": "vsce package --no-yarn"
   },
   "devDependencies": {
@@ -89,7 +86,6 @@
     "@types/node": "^10.1.2",
     "@types/react": "^16.14.60",
     "@types/react-dom": "^16.0.5",
-    "esbuild": "^0.21.3",
     "react-scripts": "^5.0.1",
     "rewire": "^6.0.0",
     "typescript": "^4.9.5",
