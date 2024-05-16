@@ -1,4 +1,4 @@
-# ![Logo_color](https://github.com/kookmin-sw/capstone-2024-27/assets/89867182/da8c56eb-9500-4769-b20e-a6ca45bb9bc9) Codate v0.1.1
+# ![Logo_color](https://github.com/kookmin-sw/capstone-2024-27/assets/89867182/da8c56eb-9500-4769-b20e-a6ca45bb9bc9) Codate v0.1.2
 
 Find teammates for your Toy Projects with **Codate**. You can easily find team members on VSCode Extension.
 
@@ -14,7 +14,6 @@ This project allow people to find teammates for their toy projects through VSCod
 Many people want to start toy projects or gain experience by participating in other people's projects, but finding such projects is not easy. We initiated this project to reduce this time and help more toy projects get started.
 
 A lot of major services are started as toy projects. And those projects have changed the world. We believe that toy projects can help developers improve their own skills and make some influences. Our goal is to make it easier to participate and start toy projects.
-
 
 VSCode Extension을 통하여 Side Project를 함께 진행할 사람을 간편하게 찾을 수 있는 서비스입니다.
 
@@ -54,7 +53,7 @@ If you want to run this projext, you have to make your own server for this. Ther
 
 - npm run make-package
 
-  codate-0.*.*.vsix will be generated on the root
+  codate-0._._.vsix will be generated on the root
 
 - Move into the Extension Marketplace on the activity bar and find "Install from VSIX"
 
