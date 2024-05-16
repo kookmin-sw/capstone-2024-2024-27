@@ -1,25 +1,27 @@
 {
   "name": "codate",
-  "version": "0.1.0",
-  "engines": {
-    "vscode": "^1.23.0"
+  "displayName": "Codate",
+  "version": "0.1.1",
+  "description": "Make your team project easier with Codate",
+  "publisher": "DongSeok Son",
+  "author": {
+    "name": "DongSeok Son",
+    "email": "dongseok.155@gmail.com"
   },
-  "publisher": "DongSeokSon",
   "readme": "README.md",
+  "changelog": "CHANGELOG.md",
   "license": "MIT",
-  "activationEvents": [
-    "onCommand:react-webview.start"
-  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/kookmin-sw/capstone-2024-27.git"
   },
   "icon": "public/codate-color.png",
-  "displayName": "Codate",
-  "description": "Make your team project easier with Codate",
-  "categories": [
-    "Other"
+  "activationEvents": [
+    "onCommand:react-webview.start"
   ],
+  "engines": {
+    "vscode": "^1.23.0"
+  },
   "main": "./build/ext-src/extension.js",
   "contributes": {
     "viewsContainers": {
@@ -35,7 +37,8 @@
       "codate": [
         {
           "id": "codate.views",
-          "name": "Get Started"
+          "name": "Get Started",
+          "icon": "public/codate-color.ico"
         }
       ]
     },
@@ -76,13 +79,17 @@
     "build": "node ./scripts/build-non-split.js && tsc -p tsconfig.extension.json",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "make-package": "npm i -g vsce && vsce package --no-yarn"
+    "esbuild-base": "esbuild ./ext-src/extension.ts --bundle --outfile=dist/extension.js --external:vscode --format=cjs --platform=node",
+    "esbuild": "npm run esbuild-base -- --sourcemap",
+    "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
+    "make-package": "vsce package --no-yarn"
   },
   "devDependencies": {
     "@types/jest": "^23.3.13",
     "@types/node": "^10.1.2",
     "@types/react": "^16.14.60",
     "@types/react-dom": "^16.0.5",
+    "esbuild": "^0.21.3",
     "react-scripts": "^5.0.1",
     "rewire": "^6.0.0",
     "typescript": "^4.9.5",

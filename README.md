@@ -2,12 +2,12 @@
 
 Find teammates for your Toy Projects with **Codate**. You can easily find team members on VSCode Extension.
 
-## 팀페이지 주소
+## Github Link 팀페이지 주소
 
 2024년 27조
 <https://github.com/kookmin-sw/capstone-2024-27>
 
-## 1. 프로젝트 소개
+## 1. Introduction 프로젝트 소개
 
 VSCode Extension을 통하여 Side Project를 함께 진행할 사람을 간편하게 찾을 수 있는 서비스입니다.
 
@@ -21,11 +21,11 @@ Many people want to start toy projects or gain experience by participating in ot
 
 A lot of major services are started as toy projects. And those projects have changed the world. We believe that toy projects can help developers improve their own skills and make some influences. Our goal is to make it easier to participate and start toy projects.
 
-## 2. 소개 영상
+## 2. Sample Video 소개 영상
 
 <img src="https://github.com/kookmin-sw/capstone-2024-27/assets/89867182/f01242be-7c26-455f-8802-47d5ffde1d65" width="300">
 
-## 3. 팀 소개
+## 3. Team Members 팀 소개
 
 | 이름       | 학번     | 포지션                     | 프로필 사진                                                                                                                              | 깃허브                                                           |
 | ---------- | -------- | -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
@@ -51,13 +51,14 @@ If you want to run this projext, you have to make your own server for this. Ther
 
 ### Option 2. Installing with VSIX package
 
+- npm run esbuild
 - npm run make-package
 
-  codate-0.1.0.vsix will be generated on the root
+  codate-0.1.1.vsix will be generated on the root
 
-- Go into the Extension Marketplace on the activity bar and find "Install from VSIX"
+- Move into the Extension Marketplace on the activity bar and find "Install from VSIX"
 
-## 5. Technology Stack
+## 5. Technology Stack 기술 스택
 
 ### Front-end
 
@@ -76,7 +77,7 @@ If you want to run this projext, you have to make your own server for this. Ther
 
 ![NO](https://img.shields.io/badge/Notion-000000?style=for-the-badge&logo=notion&logoColor=white)
 
-## 6. 기타
+## 6. References 기타
 
 This project was based on
 
