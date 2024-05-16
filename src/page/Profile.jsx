@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./Profile.css";
 import MyTextField from "../components/MyTextField";
 import MyListBox from "../components/MyListBox";
@@ -119,18 +119,8 @@ function Profile({
             scrollable={true}
           />
           <h3>Projects you like</h3>
-          {/* <MyTextField
-            value={formatProjects(likedProjects)}
-            maxRows={maxRows}
-            scrollable={true}
-          /> */}
           <MyListBox items={formatProjects(likedProjects)} />
           <h3>People who like your project.</h3>
-          {/* <MyTextField
-            value={formatProjects(likedByUsers)}
-            maxRows={maxRows}
-            scrollable={true}
-          /> */}
           <MyListBox items={formatProjects(likedByUsers)} />
         </div>
       </div>

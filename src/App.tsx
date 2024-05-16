@@ -6,7 +6,6 @@ import {
   getProfile,
   likeProject,
   uploadProfileImage,
-  getProfileImage,
 } from "./utils/api";
 
 import Profile from "./page/Profile";
@@ -37,7 +36,6 @@ const saveProfileData = async (
       },
       op
     );
-    console.log("Profile saved successfully");
     return response;
   } catch (error) {
     console.error("Error saving profile:", error);
@@ -86,7 +84,6 @@ const App: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    // console.log("Profile fetched successfully: ", project);
     if (isLoggedin && currentPage === "profile") {
       fetchProfileData();
     }
@@ -101,7 +98,6 @@ const App: React.FC = () => {
   const handleProfileClick = () => {
     setCurrentPage("profile");
     setIsReadOnly(true);
-    console.log("profile clicked");
   };
 
   const isFieldsEmpty = () => {
@@ -111,27 +107,16 @@ const App: React.FC = () => {
     return false;
   };
 
-  const isPost = () => {
-    if (initName == "") {
-      return true;
-    }
-    return false;
-  };
-
   const handleHomeClick = () => {
     setCurrentPage("home");
     setIsReadOnly(true);
-    console.log("home clicked");
   };
 
   const handleEditClick = () => {
     setIsReadOnly(!isReadOnly);
-    console.log("edit clicked");
   };
 
   const handleSaveClick = async () => {
-    console.log("done__icon clicked");
-
     if (isFieldsEmpty()) {
       setAlertMessage("Please fill all the fields");
       setAlertOpen(true);
@@ -146,7 +131,6 @@ const App: React.FC = () => {
         setProfileImage(
           `${imageResponse.imageUrl}?timestamp=${new Date().getTime()}`
         );
-        console.log("Image uploaded successfully:", imageResponse);
       } catch (error) {
         console.error("Error uploading image:", error);
         setLoading(false);
@@ -172,14 +156,12 @@ const App: React.FC = () => {
         setDescription(response.description);
         setGithubLink(response.githubLink);
         setImage(response.image);
-        console.log("169 handleSave: ", response);
       }
     } catch (error) {
       console.error("Error saving profile:", error);
     } finally {
       setLoading(false);
     }
-    // setName(response.name);
   };
 
   const handleLogin = () => {
@@ -187,7 +169,6 @@ const App: React.FC = () => {
     setIsLoggedin(true);
     setCurrentPage("home");
     fetchProfileData();
-    console.log("login success");
   };
 
   const handleLogout = () => {
@@ -213,60 +194,48 @@ const App: React.FC = () => {
       image: "",
     });
     setProfileImage("");
-    console.log("logout success");
   };
 
   const handleSignUp = () => {
     setCurrentPage("signup");
-    console.log("signup clicked");
   };
 
   const handleSignUpSuccess = () => {
     setCurrentPage("login");
     setSignUpSuccess(true);
-    console.log("signup success");
   };
 
   const handleSignInClick = () => {
     setCurrentPage("login");
-    console.log("sign in clicked");
   };
 
   const fetchProfileData = async () => {
     try {
       const profileData = await fetchProfile();
       setId(profileData.profile.id);
-      console.log("profileData.profile.id : ", profileData.profile.id);
-      console.log("200 profileImage: ", profileImage);
       setName(profileData.profile.name);
       setInitName(profileData.profile.name);
       setTitle(profileData.profile.title);
       setDescription(profileData.profile.description);
       setGithubLink(profileData.profile.githubLink);
       setImage(profileData.profile.image);
-      console.log("195 current ID : ", id);
 
       setLikedByUsers(profileData.likedByUsers);
       setLikedProjects(profileData.likedProjects);
-
-      console.log("138 fetchProfileData: ", profileData);
     } catch (error) {
-      console.error("202 Error fetching profile:", error);
+      console.error("Error fetching profile:", error);
     }
   };
 
   const fetchOtherProfile = async () => {
     let validProfileFound = false;
-    let tries = 0; // 무한 루프 방지를 위한 시도 횟수 카운터
+    let tries = 0;
     let newIndex = index;
 
     while (!validProfileFound && tries < 10) {
-      console.log("210 Fetching other profile by index:", newIndex);
-      // 유효한 프로필을 찾거나 시도 횟수가 10회를 넘지 않을 때까지 반복
       if (newIndex === id) newIndex++;
       try {
         const projectData = await getProfile(newIndex);
-        // const projectImage = await getImage(newIndex);
         if (projectData && projectData.name) {
           setProject({
             name: projectData.name,
@@ -276,17 +245,14 @@ const App: React.FC = () => {
             image: projectData.image,
           });
           validProfileFound = true;
-          console.log("223 Valid profile fetched:", projectData);
         } else {
-          newIndex++; // 유효하지 않은 프로필일 경우, 인덱스 증가
-          console.log("226 Empty profile found, skipping to next...");
+          newIndex++;
         }
       } catch (error) {
-        console.error("229 Error fetching profile by index:", error);
-        newIndex++; // 에러 발생 시 다음 인덱스로 이동
-        console.log("231 Error on profile fetch, skipping to next index..."); // 네트워크 오류 등 예외 발생 시 반복 중단
+        console.error("Error fetching profile by index:", error);
+        newIndex++;
       }
-      tries++; // 시도 횟수 증가
+      tries++;
     }
 
     if (!validProfileFound) {
@@ -299,25 +265,20 @@ const App: React.FC = () => {
       });
     }
 
-    setIndex(newIndex + 1); // 마지막으로 확인한 인덱스에서 다음 인덱스로 업데이트
+    setIndex(newIndex + 1);
   };
 
   const handleLikeButton = async () => {
-    console.log("handleLikeButton index: ", index - 1);
-
     const response = await likeProject(index - 1);
-    console.log("handleLikeButton Clicked: ", response);
     fetchOtherProfile();
   };
 
   const handleDislikeButton = async () => {
-    console.log("handleDislikeButton: ", index);
     fetchOtherProfile();
   };
 
   const onImageChange = (file: File) => {
     setProfileImage(file);
-    console.log("Image temporarily saved: ", file);
   };
 
   const handleCloseAlert = () => {
@@ -335,7 +296,6 @@ const App: React.FC = () => {
         isReadOnly={isReadOnly}
         isLoggedin={isLoggedin}
         onLogout={handleLogout}
-        // onLikeButton={fetchOtherProfile}
       />
       <div className="App-body">
         {currentPage === "home" && isLoggedin ? (
