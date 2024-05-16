@@ -38,7 +38,7 @@
         {
           "id": "codate.views",
           "name": "Get Started",
-          "icon": "public/codate-color.svg"
+          "icon": "public/codate-color.ico"
         }
       ]
     },
@@ -79,13 +79,17 @@
     "build": "node ./scripts/build-non-split.js && tsc -p tsconfig.extension.json",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "make-package": "npm i -g vsce && vsce package --no-yarn"
+    "esbuild-base": "esbuild ./ext-src/extension.ts --bundle --outfile=dist/extension.js --external:vscode --format=cjs --platform=node",
+    "esbuild": "npm run esbuild-base -- --sourcemap",
+    "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
+    "make-package": "vsce package --no-yarn"
   },
   "devDependencies": {
     "@types/jest": "^23.3.13",
     "@types/node": "^10.1.2",
     "@types/react": "^16.14.60",
     "@types/react-dom": "^16.0.5",
+    "esbuild": "^0.21.3",
     "react-scripts": "^5.0.1",
     "rewire": "^6.0.0",
     "typescript": "^4.9.5",
