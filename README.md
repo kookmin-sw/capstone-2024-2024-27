@@ -1,4 +1,4 @@
-# ![Logo_color](https://github.com/kookmin-sw/capstone-2024-27/assets/89867182/da8c56eb-9500-4769-b20e-a6ca45bb9bc9) Codate v0.1.0
+# ![Logo_color](https://github.com/kookmin-sw/capstone-2024-27/assets/89867182/da8c56eb-9500-4769-b20e-a6ca45bb9bc9) Codate v0.1.1
 
 Find teammates for your Toy Projects with **Codate**. You can easily find team members on VSCode Extension.
 
