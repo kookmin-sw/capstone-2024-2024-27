@@ -2,6 +2,12 @@
 
 Find teammates for your Toy Projects with **Codate**. You can easily find team members on VSCode Extension.
 
+## VSCode Extension Marketplace
+
+This extension is uploaded on VSCode Extension Marketplace.
+
+- [Codate](https://marketplace.visualstudio.com/items?itemName=DongSeokSon.codate)
+
 ## Github Link 팀페이지 주소
 
 2024년 27조
@@ -53,7 +59,7 @@ If you want to run this projext, you have to make your own server for this. Ther
 
 - npm run make-package
 
-  codate-0._._.vsix will be generated on the root
+  codate-0.X.X.vsix will be generated on the root
 
 - Move into the Extension Marketplace on the activity bar and find "Install from VSIX"
 
