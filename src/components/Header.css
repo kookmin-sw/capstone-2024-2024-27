@@ -1,6 +1,5 @@
 .header {
   display: flex;
-  /* position: relative; */
   justify-content: space-between;
   align-items: center;
   position: fixed;
@@ -33,10 +32,8 @@
   /* color: rgba(128, 128, 128, 0.574); */
   width: 40px;
   height: 40px;
-  /* color: black !important; */
   border-radius: 80%;
   padding: 4px;
-  /* background-color: rgba(128, 128, 128, 0.574); */
   box-shadow: 0px 5px 50px 0px rgba(0, 0, 0, 0.3);
 }
 
@@ -49,6 +46,5 @@
   height: 40px !important;
   font-size: "large";
   color: black !important;
-  /* background-color: white !important; */
   padding: 4vw !important;
 }

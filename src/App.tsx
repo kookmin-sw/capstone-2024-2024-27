@@ -6,7 +6,6 @@ import {
   getProfile,
   likeProject,
   uploadProfileImage,
-  getProfileImage,
 } from "./utils/api";
 
 import Profile from "./page/Profile";

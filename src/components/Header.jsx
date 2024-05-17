@@ -1,7 +1,5 @@
 import React from "react";
 import "./Header.css";
-// import logo from "../assets/Logo_color.svg";
-// import Logo from "./Logo";
 
 import { makeStyles } from "@material-ui/core/styles";
 import PersonIcon from "@material-ui/icons/Person";

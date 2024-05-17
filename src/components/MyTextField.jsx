@@ -32,7 +32,6 @@ function MyTextField({
         }}
         style={{
           backgroundColor: bgColor,
-          // border: "1px solid #ccc",
           fontSize: { fontSize },
         }}
         variant="outlined"

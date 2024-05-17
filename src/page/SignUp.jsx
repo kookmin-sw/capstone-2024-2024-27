@@ -3,11 +3,8 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
-import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
@@ -44,7 +41,6 @@ const useStyles = makeStyles((theme) => ({
 export default function SignUp({ onSignUpSuccess, onSignInClick }) {
   const classes = useStyles();
   const [email, setEmail] = useState("");
-  // const [confirmEmail, setConfirmEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -53,13 +49,8 @@ export default function SignUp({ onSignUpSuccess, onSignInClick }) {
   const handleSignUp = async (e) => {
     e.preventDefault();
 
-    // if (email !== confirmEmail) {
-    //   alert("Emails do not match");
-    //   return;
-    // }
     if (password !== confirmPassword) {
       setErrorText(`Passwords do not match`);
-      // alert("Passwords do not match");
       return;
     }
 
@@ -71,7 +62,6 @@ export default function SignUp({ onSignUpSuccess, onSignInClick }) {
 
       if (response.status === 201) {
         setErrorText(`User successfully created! Please log in.`);
-        // alert("User successfully created! Please log in.");
         onSignUpSuccess();
       }
     } catch (error) {
@@ -79,7 +69,6 @@ export default function SignUp({ onSignUpSuccess, onSignInClick }) {
       setErrorText(
         `Error code: ${error.response.data.message}, Sign up failed.`
       );
-      // alert(`Error code: "${error.response.data.message}", Sign up failed.`);
     }
   };
 
@@ -108,19 +97,6 @@ export default function SignUp({ onSignUpSuccess, onSignInClick }) {
                 onChange={(e) => setEmail(e.target.value)}
               />
             </Grid>
-            {/* <Grid item xs={12}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                id="confirmEmail"
-                label="Confirm Email Address"
-                name="confirmEmail"
-                autoComplete="email"
-                value={confirmEmail}
-                onChange={(e) => setConfirmEmail(e.target.value)}
-              />
-            </Grid> */}
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
