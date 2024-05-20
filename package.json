@@ -38,21 +38,21 @@
         {
           "id": "codate.views",
           "name": "Get Started",
-          "icon": "public/codate-color.ico"
+          "icon": "public/codate-color.svg"
         }
       ]
     },
+    "viewsWelcome": [
+      {
+        "view": "codate.views",
+        "contents": "# Welcome to Codate!!  \n\nYou can start finding your teammates with Codate. \n\nIf you need more information, please visit my [github](https://github.com/kookmin-sw/capstone-2024-27). \n[Get Started](command:react-webview.start)"
+      }
+    ],
     "commands": [
       {
         "command": "react-webview.start",
         "title": "Start React Webview",
         "category": "Codate"
-      }
-    ],
-    "viewsWelcome": [
-      {
-        "view": "codate.views",
-        "contents": "# Welcome to Codate!!  \n\nYou can start finding your teammates with Codate. \n\nIf you need more information, please visit my [github](https://github.com/kookmin-sw/capstone-2024-27). \n[Get Started](command:react-webview.start)"
       }
     ]
   },
