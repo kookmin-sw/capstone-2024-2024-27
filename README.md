@@ -95,3 +95,11 @@ This project was based on
 - [Create React App](https://github.com/facebookincubator/create-react-app)
 - [Create React App TypeScript](https://github.com/wmonk/create-react-app-typescript)
 - [VSCode Extension Webview Sample](https://github.com/Microsoft/vscode-extension-samples/tree/master/webview-sample)
+
+## 7. Documents 문서
+
+- [Poster Link](https://drive.google.com/file/d/1kWjAp6Sb4rAR-OeqSi5NqpO1p-5Cs82i/view?usp=sharing)
+- [Presentation Slides Link](https://drive.google.com/file/d/16a1_LUurLRkSs_ZrBAw_mHz-vqwY-jvD/view?usp=sharing)
+- [Final Report Link](https://drive.google.com/file/d/1a8iSjjEB9n0LPiWDuAPwmpN03plhtBhb/view?usp=sharing)
+- Youtube Link
+  [![Video Label](https://github.com/kookmin-sw/capstone-2024-27/assets/89867182/df483868-357a-45b6-9559-40903d570cce)](https://youtube.com/shorts/hzHLWrA_N50?feature=share)
